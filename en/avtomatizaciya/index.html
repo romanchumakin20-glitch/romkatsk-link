@@ -41,7 +41,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://romkatsk.ru/en/avtomatizaciya/">
 <meta property="og:title" content="Business Automation &amp; AI Agents — Roman Chumakin">
-<meta property="og:description" content="An AI chat manager, a CRM for every messenger, automated uploads to Avito. The same systems my agency runs on.">
+<meta property="og:description" content="A business that answers customers in seconds, never loses a lead and handles the routine on its own.">
 <meta property="og:image" content="https://romkatsk.ru/og-cover.jpg">
 
 <link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png">
@@ -638,41 +638,14 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
   .lead .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
   .lead .res{min-height:1.2em;font-size:14px;text-align:center;margin:0}
   .lead .res.ok{color:var(--accent-mint,#5ff0b7)} .lead .res.bad{color:#ff8a80}
+  .hero .lead{max-width:560px;margin:0 0 32px;display:block;text-align:left}
   :root[data-theme="light"] .lead .res.ok{color:#0f7a4f} :root[data-theme="light"] .lead .res.bad{color:#c62828}
-</style>
-<!-- ANTI-SLOP -->
-<style>
-/* Без декоративных эффектов типового ИИ-лендинга: свечений, сетки, градиентного текста,
-   иконок в плашках, бейджей, проявления при прокрутке. Лежит последним, поэтому !important
-   нужен только против правил светлой темы с более высокой специфичностью. */
-:root,:root[data-theme="light"]{ --radius:10px; }
-.pulse,.pain-x{ display:none !important; }
-.grad,.stat-n,.case-num{ background:none !important; -webkit-background-clip:border-box !important;
-  background-clip:border-box !important; color:inherit !important; }
-.eyebrow,.case-niche{ font-family:'Manrope',system-ui,sans-serif !important; text-transform:none !important;
-  letter-spacing:0 !important; font-size:15px !important; font-weight:600; }
-.eyebrow{ padding:0 !important; border:0 !important; background:none !important; color:var(--text-muted) !important; }
-.case-niche{ color:var(--text-muted) !important; }
-.hero .lead{ max-width:560px; margin:0 0 32px; display:block; text-align:left; }
-.btn,.feed,.sol,.case,.step,.final,.why > div,.faq details{ box-shadow:none !important; }
-.feed,.sol,.case,.case.wide,.final{ background:var(--bg-panel) !important; }
-.sol:hover{ transform:none !important; }
-.sol li::before{ width:6px !important; height:6px !important; top:.62em !important; border-radius:0 !important;
-  background:var(--text-muted) !important; }
-.pain{ background:none !important; border:0 !important; border-top:1px solid var(--divider) !important;
-  border-radius:0 !important; padding:18px 0 !important; }
-.stats{ grid-template-columns:repeat(3,1fr) !important; }
-@media (max-width:640px){ .stats{ grid-template-columns:1fr !important; } }
-.feed,.feed::before,.case,details{ border-radius:var(--radius) !important; }
-.btn.main{ background:#2a7bf0 !important; }
-:root[data-theme="light"] .btn.main{ background:#1667c9 !important; }
-.btn.main:hover{ transform:none !important; filter:brightness(1.08); }
-.step::before{ font-family:'Manrope',system-ui,sans-serif !important; font-weight:700; padding:0 !important;
-  border:0 !important; background:none !important; border-radius:0 !important; color:var(--text-muted) !important; }
-.js .rv{ opacity:1 !important; transform:none !important; transition:none !important; }
 </style>
 </head>
 <body>
+  <div class="bg-grid"></div>
+  <div class="glow a"></div>
+  <div class="glow b"></div>
 
   <div class="wrap">
 
@@ -689,9 +662,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
     <!-- HERO -->
     <div class="hero">
       <div>
-        <span class="eyebrow">Business automation &amp; AI agents</span>
-        <h1>I automate leads, customer chats and&nbsp;routine work</h1>
-        <p class="lead">An AI manager replies to customers in the evening and on weekends. A CRM pulls chats from every messenger into one feed. Automated uploads put your products on Avito.</p>
+        <span class="eyebrow"><span class="pulse"></span>Business automation &amp; AI agents</span>
+        <h1>A business that <span class="grad">works while you&nbsp;sleep</span></h1>
+        <p class="lead">I set up AI managers, CRM systems, bots and automated listing uploads. They answer customers in seconds, never drop a single lead and take care of the routine, while you see the results in hard numbers.</p>
         <div class="btns">
           <a class="btn main" href="https://max.ru/u/f9LHodD0cOIXB-F1u0pDgw0YfGYCEzNh_cnDXEuHyGzvqk4zf6NTt8B4-fg" target="_blank" rel="noopener"
              data-msg="Hello! I’d like to discuss automation for my business.">
@@ -709,7 +682,7 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
       <div class="feed" aria-label="Example of what automation gets done in one evening">
         <div class="feed-head">
-          <div class="feed-title">Your business at 11 PM</div>
+          <div class="feed-title"><span class="pulse"></span>Your business at 11 PM</div>
           <div class="feed-note">example</div>
         </div>
         <ul class="feed-list" id="feed"></ul>
@@ -721,28 +694,38 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
       <div class="stat"><div class="stat-n">26</div><div class="stat-l">Avito accounts already run by my AI agent</div></div>
       <div class="stat"><div class="stat-n">17,000+</div><div class="stat-l">bids sent by bots on freelance marketplaces</div></div>
       <div class="stat"><div class="stat-n">4.7x</div><div class="stat-l">more listings for a client after automated uploads</div></div>
+      <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">no weekends, vacations or sick days</div></div>
     </div>
 
     <!-- PAINS -->
     <section>
-      <h2 class="rv">Where leads usually get lost</h2>
-      <p class="sub rv">These are the problems people bring to me most often.</p>
+      <div class="kicker rv">Sound familiar?</div>
+      <h2 class="rv">Every day, businesses lose money on the&nbsp;small stuff</h2>
+      <p class="sub rv">These losses never show up in reports, yet everyone who sells through chats, calls and marketplaces pays for them.</p>
       <div class="pains">
-        <div class="pain rv"><p><b>A customer messaged at night, you replied in the morning</b>By then they had already bought from whoever answered first.</p></div>
-        <div class="pain rv"><p><b>Leads are scattered across five channels</b>Avito, Telegram, WhatsApp, MAX, your website. Some get lost, and nobody knows which.</p></div>
-        <div class="pain rv"><p><b>Managers work however they like</b>Someone didn’t call back, someone forgot a customer. There’s no way to check.</p></div>
-        <div class="pain rv"><p><b>Routine eats up hours</b>Products, prices, reports and documents get copied by hand.</p></div>
+        <div class="pain rv"><span class="pain-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+          <p><b>A customer messaged at night, you replied in the morning</b>By then they had already bought from whoever answered first.</p></div>
+        <div class="pain rv"><span class="pain-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+          <p><b>Leads are scattered across five channels</b>Avito, Telegram, WhatsApp, MAX, your website. Some get lost, and nobody knows which.</p></div>
+        <div class="pain rv"><span class="pain-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+          <p><b>Managers work however they like</b>Someone didn’t call back, someone forgot a customer. You can’t check until the money is gone.</p></div>
+        <div class="pain rv"><span class="pain-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+          <p><b>Routine eats up hours</b>Products, prices, reports and documents get copied by hand. You pay an employee to do a robot’s job.</p></div>
       </div>
+      <div class="turn rv"><b>Automation fixes all of this.</b> Not “AI for the sake of AI”, but specific systems that plug a specific leak in your revenue.</div>
     </section>
 
     <!-- SOLUTIONS -->
     <section id="resheniya">
+      <div class="kicker rv">Solutions</div>
       <h2 class="rv">What I automate</h2>
-      <p class="sub rv">All of this already runs for my clients. You can take one solution or combine several.</p>
+      <p class="sub rv">Every solution is already running in a real business. I tailor it to your needs: a single solution or a combination of several.</p>
 
       <div class="sol-grid">
 
-        <article class="sol rv">
+        <article class="sol hot rv">
+          <span class="badge">Bestseller</span>
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/><path d="M9 10h.01M12 10h.01M15 10h.01" stroke-width="2.6"/></svg></div>
           <h3>AI chat manager</h3>
           <p>Answers customers on Avito, Telegram, MAX, WhatsApp and your website. Around the clock, in seconds.</p>
           <ul>
@@ -751,9 +734,11 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>Hands the conversation to a human when needed</li>
             <li>Notifies you of every lead in Telegram</li>
           </ul>
+          <div class="sol-res">No customer waits until morning</div>
         </article>
 
         <article class="sol rv">
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></div>
           <h3>Unified inbox and CRM</h3>
           <p>All messaging channels in one feed and one pipeline. A customer who writes from different messengers is merged into one profile by phone number.</p>
           <ul>
@@ -762,9 +747,12 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>Calls and recordings right in the customer card</li>
             <li>Migration from Bitrix24 with no data loss or duplicates</li>
           </ul>
+          <div class="sol-res">You see every customer and every manager</div>
         </article>
 
-        <article class="sol rv">
+        <article class="sol hot rv">
+          <span class="badge">Lead flow</span>
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M13 3L4 14h7l-1 7 9-11h-7z"/></svg></div>
           <h3>Freelance marketplace bid bot</h3>
           <p>Monitors new orders on marketplaces 24/7 and bids first while competitors are asleep.</p>
           <ul>
@@ -773,9 +761,11 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>Keeps the conversation going and follows up with those who went quiet</li>
             <li>Uses only the marketplace’s free bid limits</li>
           </ul>
+          <div class="sol-res">Up to 597 bids a day on a single project</div>
         </article>
 
         <article class="sol rv">
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div>
           <h3>Lead capture in online communities</h3>
           <p>Monitors niche Telegram chats and finds people who are looking for a contractor right now.</p>
           <ul>
@@ -783,9 +773,12 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>First direct message within minutes, not a day later</li>
             <li>From there, you or the AI manager take over the conversation</li>
           </ul>
+          <div class="sol-res">One in four on-topic messages turned out to be a lead</div>
         </article>
 
-        <article class="sol rv">
+        <article class="sol hot rv">
+          <span class="badge">For product sellers</span>
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/></svg></div>
           <h3>Automated product uploads to Avito</h3>
           <p>Thousands of listings built from 1C, a Google Sheet or a supplier’s API. No manual work.</p>
           <ul>
@@ -794,9 +787,11 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>No duplicates: checks by SKU and photo</li>
             <li>Error checks before publishing</li>
           </ul>
+          <div class="sol-res">From 2,669 listings to about 12,600</div>
         </article>
 
         <article class="sol rv">
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></div>
           <h3>Telephony and outbound calling</h3>
           <p>Numbers per department, calls straight from the browser, calling through your contact list with a required outcome logged for every call.</p>
           <ul>
@@ -805,9 +800,11 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>One-click company check by tax ID (INN)</li>
             <li>Incoming calls ring only the staff in the right zone</li>
           </ul>
+          <div class="sol-res">No call gets lost or left without an outcome</div>
         </article>
 
         <article class="sol rv">
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
           <h3>Owner dashboards</h3>
           <p>Your business numbers on one screen, not in your managers’ heads or in ten spreadsheets.</p>
           <ul>
@@ -815,9 +812,11 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>KPIs, “who’s stuck”, a traffic-light view of deals</li>
             <li>Monthly P&amp;L: revenue, expenses, profitability</li>
           </ul>
+          <div class="sol-res">Run your business on numbers, not gut feeling</div>
         </article>
 
         <article class="sol rv">
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></div>
           <h3>Documents and routine tasks</h3>
           <p>Everything your staff does by template, the system does for them.</p>
           <ul>
@@ -825,9 +824,11 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>Cost estimates from a photo of a drawing: AI reads it, code does the math</li>
             <li>Invoices, completion certificates and payment reminders</li>
           </ul>
+          <div class="sol-res">Hours of routine become minutes</div>
         </article>
 
         <article class="sol rv">
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div>
           <h3>Telegram for communities and content</h3>
           <p>Order in your chats and regular content with no manual work.</p>
           <ul>
@@ -835,6 +836,7 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>Dozens of groups managed from one panel</li>
             <li>Niche SEO articles, with tracking of which article brought in each customer</li>
           </ul>
+          <div class="sol-res">Admins no longer clean up chats by hand</div>
         </article>
 
       </div>
@@ -842,8 +844,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
     <!-- CASES -->
     <section id="kejsy">
-      <h2 class="rv">Case studies</h2>
-      <p class="sub rv">I don’t disclose company names. The numbers are real.</p>
+      <div class="kicker rv">Case studies</div>
+      <h2 class="rv">Results in numbers</h2>
+      <p class="sub rv">I don’t disclose company names: client confidentiality matters more than a pretty showcase. The numbers are real.</p>
 
       <div class="cases">
 
@@ -882,7 +885,7 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
           <div class="case-num">3x<small>more purchases after a real conversation</small></div>
           <div>
             <div class="case-niche">Analysis of 400+ conversations</div>
-            <h3>The longer the conversation, the more often people buy</h3>
+            <h3>It’s not the price that sells, it’s the depth of the conversation</h3>
             <p>When a customer sends one message, a deal happens 16% of the time; at seven messages or more, it’s 46%. That’s why the AI never abandons a conversation and gently keeps it moving.</p>
           </div>
         </div>
@@ -909,7 +912,7 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
           <div class="case-num">1 ban<small>applies across every club chat at once</small></div>
           <div>
             <div class="case-niche">Business club</div>
-            <h3>One anti-spam for every chat in the club</h3>
+            <h3>Spam is gone, admins are free</h3>
             <p>Anti-spam based on scoring and spammer databases: a ban applies across all club chats at once. For the club’s schools, a set of 8 presentations is generated at the push of a button.</p>
           </div>
         </div>
@@ -919,8 +922,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
     <!-- STEPS -->
     <section>
-      <h2 class="rv">How we work</h2>
-      <p class="sub rv">You don’t need to write a spec. I need a conversation and access.</p>
+      <div class="kicker rv">How we work</div>
+      <h2 class="rv">From a conversation to a working system</h2>
+      <p class="sub rv">No specs to write, no developers to hire. All I need from you is one conversation and access.</p>
       <div class="steps">
         <div class="step rv"><h3>Review</h3><p>We get on a call and find where your business is losing money and time.</p></div>
         <div class="step rv"><h3>Plan and price</h3><p>I lock in what will be done, the expected result and what it costs.</p></div>
@@ -932,9 +936,10 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
     <!-- WHY -->
     <section>
-      <h2 class="rv">Why you can trust me with this</h2>
+      <div class="kicker rv">Why me</div>
+      <h2 class="rv">I don’t sell technology. I sell results</h2>
       <div class="why">
-        <div class="rv"><b>Tested on my own business</b><p>My agency serves 36 clients on these very systems.</p></div>
+        <div class="rv"><b>Tested on my own business</b><p>My agency serves 36 clients on these very systems. You get something that already works.</p></div>
         <div class="rv"><b>I know sales</b><p>7 years in marketing: my clients have earned 65M+ RUB with my help.</p></div>
         <div class="rv"><b>AI under control</b><p>It never makes up prices or overpromises. Money is calculated by code, not by a neural network.</p></div>
         <div class="rv"><b>Your data is safe</b><p>Customers’ personal data is processed in line with Russian Federal Law 152-FZ, using Russian AI models.</p></div>
@@ -943,6 +948,7 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
     <!-- FAQ -->
     <section>
+      <div class="kicker rv">Questions</div>
       <h2 class="rv">Frequently asked questions</h2>
       <div class="faq">
         <details class="rv"><summary>How much does it cost?</summary>
@@ -960,9 +966,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
     <!-- FINAL -->
     <div class="final rv" id="svyaz">
-      <span class="eyebrow">Free review</span>
-      <h2>Describe the task and I’ll tell you what can be automated</h2>
-      <p class="sub">The review is free. Afterwards you’ll know what can be automated and what it costs.</p>
+      <span class="eyebrow"><span class="pulse"></span>Free review</span>
+      <h2>Tell me where your routine is. I’ll show you what can be automated</h2>
+      <p class="sub">One conversation, and you’ll know how much money and time you can win back for your business. No strings attached.</p>
       <div class="btns">
         <a class="btn main" href="https://max.ru/u/f9LHodD0cOIXB-F1u0pDgw0YfGYCEzNh_cnDXEuHyGzvqk4zf6NTt8B4-fg" target="_blank" rel="noopener"
            data-msg="Hello! I’d like a free review of what can be automated in my business.">
@@ -1023,7 +1029,7 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
        data-msg="Hello! I’d like to discuss automation for my business.">Discuss my project</a>
   </div>
 
-  <div class="toast" id="toast" role="status" aria-live="polite">Message copied, paste it into the chat</div>
+  <div class="toast" id="toast" role="status" aria-live="polite">Message copied — paste it into the chat</div>
 
   <script>
   /* Example feed on the first screen: events on a loop */
