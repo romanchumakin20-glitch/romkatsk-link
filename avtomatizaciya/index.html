@@ -385,6 +385,43 @@ document.documentElement.className += ' js';
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';
 if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('click_max');else if(/wa\.me|whatsapp/.test(h))g('click_whatsapp');},true);})();
 </script>
+<!-- LANG-SWITCH -->
+<link rel="alternate" hreflang="ru" href="https://romkatsk.ru/avtomatizaciya/">
+<link rel="alternate" hreflang="en" href="https://romkatsk.ru/en/avtomatizaciya/">
+<link rel="alternate" hreflang="zh-Hans" href="https://romkatsk.ru/zh/avtomatizaciya/">
+<link rel="alternate" hreflang="x-default" href="https://romkatsk.ru/avtomatizaciya/">
+<script>
+(function(){
+  var K='rk-lang', d=document.documentElement, cur=(d.lang||'ru').slice(0,2);
+  function save(l){try{localStorage.setItem(K,l)}catch(e){}}
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-setlang]');if(a)save(a.getAttribute('data-setlang'))},true);
+  try{
+    if(/bot|crawl|spider|slurp|yandex|google|bing|baidu|lighthouse|headless|preview/i.test(navigator.userAgent))return;
+    if(localStorage.getItem(K))return;
+    if(document.referrer&&document.referrer.indexOf(location.origin)===0)return;
+    var ls=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||'']).map(function(l){return String(l).toLowerCase().slice(0,2)});
+    var want=null;
+    for(var i=0;i<ls.length;i++){if(ls[i]==='ru'||ls[i]==='en'||ls[i]==='zh'){want=ls[i];break}}
+    if(!want)want=ls.some(function(l){return /^(uk|be|kk|ky|uz|tg|hy|az|ka|tt|ba|mn)$/.test(l)})?'ru':'en';
+    save(want);
+    if(want===cur)return;
+    var rest=location.pathname.replace(/^\/(en|zh)(\/|$)/,'/');
+    location.replace((want==='ru'?'':'/'+want)+rest+location.search+location.hash);
+  }catch(e){}
+})();
+</script>
+<style>
+  .lang{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--divider);border-radius:999px;
+    background:rgba(16,22,42,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    font:600 12px/1 'Manrope',system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;letter-spacing:.02em}
+  .lang a{display:inline-flex;align-items:center;justify-content:center;min-width:34px;min-height:30px;padding:0 10px;
+    border-radius:999px;color:var(--text-muted);text-decoration:none;transition:color .2s,background .2s}
+  .lang a:hover{color:var(--text-primary)}
+  .lang a:focus-visible{outline:2px solid var(--accent-blue);outline-offset:1px}
+  .lang a[aria-current]{color:var(--text-primary);background:rgba(63,169,245,.18)}
+  .lang-float{position:absolute;top:14px;right:14px;z-index:5}
+  .top .lang{margin-left:auto}
+</style>
 </head>
 <body>
   <div class="bg-grid"></div>
@@ -398,6 +435,7 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
         Роман Чумакин
       </a>
+      <nav class="lang" aria-label="Language / Язык / 语言"><a href="/avtomatizaciya/" hreflang="ru" lang="ru" data-setlang="ru" title="Русский" aria-current="page">RU</a><a href="/en/avtomatizaciya/" hreflang="en" lang="en" data-setlang="en" title="English">EN</a><a href="/zh/avtomatizaciya/" hreflang="zh" lang="zh" data-setlang="zh" title="中文">中文</a></nav>
       <a class="top-cta" href="https://max.ru/u/f9LHodD0cOIXB-F1u0pDgw0YfGYCEzNh_cnDXEuHyGzvqk4zf6NTt8B4-fg" target="_blank" rel="noopener"
          data-msg="Здравствуйте! Хочу обсудить автоматизацию для моего бизнеса.">Обсудить задачу</a>
     </header>

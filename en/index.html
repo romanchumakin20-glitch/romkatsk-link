@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roman Chumakin — Avito Specialist &amp; Marketer: Avito, Cian, AI Agents</title>
+<meta name="description" content="Roman Chumakin — Avito specialist and marketer: promotion on Avito, Russia’s largest classifieds marketplace, Avito and Cian campaigns for property developers, AI chat agents, Yandex Direct ads and business automation. 7 years in marketing. Case studies and contact via MAX, Telegram, WhatsApp.">
+<link rel="canonical" href="https://romkatsk.ru/en/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Roman Chumakin">
+<meta name="theme-color" content="#060911">
+<meta name="color-scheme" content="dark">
+
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Roman Chumakin">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Roman Chumakin — Marketer">
+<meta property="og:description" content="Roman Chumakin — Avito specialist and marketer: promotion on Avito, Russia’s largest classifieds marketplace, Avito and Cian campaigns for property developers, AI chat agents, Yandex Direct ads and business automation. 7 years in marketing. Case studies and contact via MAX, Telegram, WhatsApp.">
+<meta property="og:url" content="https://romkatsk.ru/en/">
+<meta property="og:image" content="https://romkatsk.ru/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Roman Chumakin — Marketer">
+<meta property="profile:first_name" content="Roman">
+<meta property="profile:last_name" content="Chumakin">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Roman Chumakin — Marketer">
+<meta name="twitter:description" content="Roman Chumakin — Avito specialist and marketer: promotion on Avito, Russia’s largest classifieds marketplace, Avito and Cian campaigns for property developers, AI chat agents, Yandex Direct ads and business automation. 7 years in marketing. Case studies and contact via MAX, Telegram, WhatsApp.">
+<meta name="twitter:image" content="https://romkatsk.ru/og-cover.jpg">
+
+<link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<link rel="preload" href="/manrope.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/plexmono-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/playfair-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="/portrait-336.webp" type="image/webp" imagesrcset="/portrait-336.webp 336w, /portrait-504.webp 504w" imagesizes="168px" fetchpriority="high">
+<style>
+  /* Fonts are self-hosted: zero requests to third-party domains.
+     Manrope is variable (weights 200-800 in one file); both fonts are subset
+     to the characters actually used. Fraunces was dropped: it has no Cyrillic,
+     so the heading fell back to a system serif; Playfair Display replaced it. */
+  @font-face{
+    font-family: 'Manrope';
+    src: url('/manrope.woff2') format('woff2');
+    font-weight: 200 800;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face{
+    font-family: 'Playfair Display';
+    src: url('/playfair-600.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face{
+    font-family: 'IBM Plex Mono';
+    src: url('/plexmono-400.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root{
+    --bg-deep: #060911;
+    --bg-panel: #10162a;
+    --bg-panel-hover: #161d38;
+    --accent-blue: #3fa9f5;
+    --accent-cyan: #7fe3ff;
+    --text-primary: #f3f5fa;
+    --text-muted: #8a96b0;
+    --divider: rgba(255,255,255,0.09);
+  }
+
+  *{ box-sizing: border-box; }
+
+  html,body{
+    margin:0;
+    padding:0;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    font-family: 'Manrope', sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body{
+    position: relative;
+    overflow-x: hidden;
+    display:flex;
+    justify-content:center;
+    padding: 64px 20px 80px;
+  }
+
+  /* ambient starfield */
+  .stars{
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1.5px 1.5px at 60% 70%, rgba(255,255,255,0.35), transparent),
+      radial-gradient(1px 1px at 30% 85%, rgba(255,255,255,0.45), transparent),
+      radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(1.5px 1.5px at 45% 40%, rgba(255,255,255,0.25), transparent),
+      radial-gradient(1px 1px at 15% 55%, rgba(255,255,255,0.3), transparent);
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  .glow-top{
+    position: fixed;
+    top: -220px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 500px;
+    background: radial-gradient(closest-side, rgba(63,169,245,0.20), transparent 70%);
+    filter: blur(10px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page{
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 440px;
+  }
+
+  /* portrait + rotating ring, echoing the event backdrop */
+  .portrait-wrap{
+    position: relative;
+    width: 168px;
+    height: 168px;
+    margin: 0 auto 28px;
+  }
+
+  .ring{
+    position: absolute;
+    inset: -14px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 0%, var(--accent-blue) 12%, transparent 28%, transparent 60%, var(--accent-cyan) 74%, transparent 88%);
+    animation: spin 9s linear infinite;
+    opacity: 0.85;
+  }
+
+  .ring::before{
+    content:"";
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--bg-deep);
+  }
+
+  @keyframes spin{
+    to{ transform: rotate(360deg); }
+  }
+
+  .portrait{
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,0.06);
+    box-shadow: 0 0 40px rgba(63,169,245,0.25);
+  }
+
+  .portrait img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .identity{
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .eyebrow{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-cyan);
+    margin-bottom: 10px;
+  }
+
+  h1{
+    /* Playfair Display instead of Fraunces: Fraunces has no Cyrillic, the name was drawn in a system serif */
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 1.1;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .role{
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.55;
+    max-width: 340px;
+    margin: 0 auto 36px;
+  }
+
+  .role b{
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .section-label{
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 12px 4px;
+  }
+
+  .links{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .link-row{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px 18px;
+    background: var(--bg-panel);
+    border: 1px solid var(--divider);
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  }
+
+  .link-row:hover{
+    background: var(--bg-panel-hover);
+    border-color: rgba(63,169,245,0.35);
+    transform: translateY(-1px);
+  }
+
+  .link-row.primary{
+    background: linear-gradient(135deg, rgba(63,169,245,0.18), rgba(127,227,255,0.08));
+    border-color: rgba(63,169,245,0.45);
+  }
+
+  .link-row.primary:hover{
+    background: linear-gradient(135deg, rgba(63,169,245,0.28), rgba(127,227,255,0.14));
+    border-color: var(--accent-cyan);
+  }
+
+  .link-row.primary .icon{
+    background: rgba(63,169,245,0.22);
+  }
+
+  .icon{
+    flex: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(63,169,245,0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon svg{
+    width: 18px;
+    height: 18px;
+    stroke: var(--accent-cyan);
+    fill: none;
+  }
+
+  .icon svg.filled{
+    fill: var(--accent-cyan);
+    stroke: none;
+  }
+
+  .link-text{
+    flex: 1;
+    min-width: 0;
+  }
+
+  .link-title{
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 1px;
+  }
+
+  .link-sub{
+    font-size: 12.5px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+  .arrow{
+    flex: none;
+    width: 16px;
+    height: 16px;
+    color: var(--text-muted);
+  }
+
+  footer{
+    text-align: center;
+    margin-top: 28px;
+  }
+
+  footer .divider{
+    width: 40px;
+    height: 1px;
+    background: var(--divider);
+    margin: 0 auto 18px;
+  }
+
+  footer p{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    color: rgba(138,150,176,0.55);
+    margin: 0;
+  }
+
+  @media (max-width: 380px){
+    h1{ font-size: 29px; }
+  }
+
+  /* hint shown after the message text is copied */
+  .toast{
+    position: fixed;
+    left: 50%;
+    bottom: 26px;
+    transform: translate(-50%, 14px);
+    max-width: calc(100vw - 40px);
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: var(--bg-panel-hover);
+    border: 1px solid rgba(63,169,245,0.45);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.5);
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    z-index: 5;
+  }
+
+  .toast.show{
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .ring{ animation: none; }
+    *{ transition-duration: 0.01ms !important; }
+  }
+</style>
+<!-- Yandex.Metrika counter 113221102 — add to <head> of every page -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){
+m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();
+for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113221102', 'ym');
+ym(113221102, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113221102" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<script>
+/* Goals: clicks on phone, messengers and form submissions */
+(function(){var ID=113221102;function g(n){try{ym(ID,'reachGoal',n)}catch(e){}}
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';
+if(h.indexOf('tel:')===0)g('click_phone');else if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('click_max');else if(/wa\.me|whatsapp/.test(h))g('click_whatsapp');},true);
+document.addEventListener('submit',function(){g('form_submit')},true);})();
+</script>
+<!-- LANG-SWITCH -->
+<link rel="alternate" hreflang="ru" href="https://romkatsk.ru/">
+<link rel="alternate" hreflang="en" href="https://romkatsk.ru/en/">
+<link rel="alternate" hreflang="zh-Hans" href="https://romkatsk.ru/zh/">
+<link rel="alternate" hreflang="x-default" href="https://romkatsk.ru/">
+<script>
+(function(){
+  var K='rk-lang', d=document.documentElement, cur=(d.lang||'ru').slice(0,2);
+  function save(l){try{localStorage.setItem(K,l)}catch(e){}}
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-setlang]');if(a)save(a.getAttribute('data-setlang'))},true);
+  try{
+    if(/bot|crawl|spider|slurp|yandex|google|bing|baidu|lighthouse|headless|preview/i.test(navigator.userAgent))return;
+    if(localStorage.getItem(K))return;
+    if(document.referrer&&document.referrer.indexOf(location.origin)===0)return;
+    var ls=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||'']).map(function(l){return String(l).toLowerCase().slice(0,2)});
+    var want=null;
+    for(var i=0;i<ls.length;i++){if(ls[i]==='ru'||ls[i]==='en'||ls[i]==='zh'){want=ls[i];break}}
+    if(!want)want=ls.some(function(l){return /^(uk|be|kk|ky|uz|tg|hy|az|ka|tt|ba|mn)$/.test(l)})?'ru':'en';
+    save(want);
+    if(want===cur)return;
+    var rest=location.pathname.replace(/^\/(en|zh)(\/|$)/,'/');
+    location.replace((want==='ru'?'':'/'+want)+rest+location.search+location.hash);
+  }catch(e){}
+})();
+</script>
+<style>
+  .lang{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--divider);border-radius:999px;
+    background:rgba(16,22,42,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    font:600 12px/1 'Manrope',system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;letter-spacing:.02em}
+  .lang a{display:inline-flex;align-items:center;justify-content:center;min-width:34px;min-height:30px;padding:0 10px;
+    border-radius:999px;color:var(--text-muted);text-decoration:none;transition:color .2s,background .2s}
+  .lang a:hover{color:var(--text-primary)}
+  .lang a:focus-visible{outline:2px solid var(--accent-blue);outline-offset:1px}
+  .lang a[aria-current]{color:var(--text-primary);background:rgba(63,169,245,.18)}
+  .lang-float{position:absolute;top:14px;right:14px;z-index:5}
+  .top .lang{margin-left:auto}
+</style>
+</head>
+<body>
+  <nav class="lang lang-float" aria-label="Language / Язык / 语言"><a href="/" hreflang="ru" lang="ru" data-setlang="ru" title="Русский">RU</a><a href="/en/" hreflang="en" lang="en" data-setlang="en" title="English" aria-current="page">EN</a><a href="/zh/" hreflang="zh" lang="zh" data-setlang="zh" title="中文">中文</a></nav>
+
+  <div class="stars"></div>
+  <div class="glow-top"></div>
+
+  <div class="page">
+
+    <div class="portrait-wrap">
+      <div class="ring"></div>
+      <div class="portrait">
+        <picture>
+          <source type="image/webp" srcset="/portrait-336.webp 336w, /portrait-504.webp 504w" sizes="168px">
+          <img src="/portrait-336.jpg" width="168" height="168" decoding="async" fetchpriority="high"
+               alt="Roman Chumakin — marketer, Avito advertising and Yandex Direct ads">
+        </picture>
+      </div>
+    </div>
+
+    <div class="identity">
+      <div class="eyebrow">Marketer</div>
+      <h1>Roman Chumakin</h1>
+      <p class="role"><b>Avito</b> advertising, websites, <b>Yandex Direct ads</b>, <b>business process automation</b> — I turn traffic into leads and sales.</p>
+      <p class="role">7 years in marketing and on Avito, Russia’s largest classifieds marketplace. My clients have earned 65M+ RUB with my help, and for one client I brought in 9.1M RUB worth of leads. Curator at the Avito school.</p>
+    </div>
+
+    <h2 class="section-label">Services</h2>
+    <div class="links">
+
+      <a class="link-row primary" href="/en/avtomatizaciya/"
+         aria-label="Business process automation — solutions and case studies">
+        <span class="icon">
+          <svg viewBox="0 0 24 24"><path d="M20.4 10.2A8.5 8.5 0 0 0 5.6 6.4" stroke-width="1.8" stroke-linecap="round"/><path d="M3.6 13.8a8.5 8.5 0 0 0 14.8 3.8" stroke-width="1.8" stroke-linecap="round"/><path d="M5.7 2.4v4h4M18.3 21.6v-4h-4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="1.7" stroke-width="1.8"/></svg>
+        </span>
+        <span class="link-text">
+          <div class="link-title">Business process automation</div>
+          <div class="link-sub">AI agents, CRM, bots · solutions and case studies</div>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+      <a class="link-row primary" href="https://max.ru/u/f9LHodD0cOIXB-F1u0pDgw0YfGYCEzNh_cnDXEuHyGzvqk4zf6NTt8B4-fg"
+         target="_blank" rel="noopener"
+         data-msg="Hello! I’m interested in having my Avito account set up"
+         aria-label="Set up Avito advertising — message me on MAX">
+        <span class="icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" stroke-width="1.8"/><circle cx="12" cy="12" r="1.3" stroke-width="0" fill="currentColor" class="filled"/></svg>
+        </span>
+        <span class="link-text">
+          <div class="link-title">Set up Avito advertising</div>
+          <div class="link-sub">Message me on MAX</div>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+      <a class="link-row" href="https://proavitor.ru/" target="_blank" rel="noopener">
+        <span class="icon">
+          <svg viewBox="0 0 24 24"><path d="M4 20V9l8-5 8 5v11" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 20v-6h6v6" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="link-text">
+          <div class="link-title">Avito &amp; Cian for property developers</div>
+          <div class="link-sub">proavitor.ru</div>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+    </div>
+
+    <h2 class="section-label">Case studies</h2>
+    <div class="links">
+
+      <a class="link-row" href="https://t.me/+kbb-8ycWiuFkZTYy" target="_blank" rel="noopener">
+        <span class="icon">
+          <svg viewBox="0 0 24 24"><path d="M3 8l2-3h14l2 3M3 8v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8M3 8h18" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="link-text">
+          <div class="link-title">Case studies on Telegram</div>
+          <div class="link-sub">Real projects and results</div>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+      <a class="link-row" href="https://max.ru/join/U_i4RSrA5d0OIBG7d_HX_JeplkViwm7IOF6gM_TBtUo" target="_blank" rel="noopener">
+        <span class="icon">
+          <svg viewBox="0 0 24 24"><path d="M3 8l2-3h14l2 3M3 8v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8M3 8h18" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="link-text">
+          <div class="link-title">Case studies on MAX</div>
+          <div class="link-sub">Real projects and results</div>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+    </div>
+
+    <h2 class="section-label">Free resources</h2>
+    <div class="links">
+
+      <a class="link-row" href="https://проавито.рф/check-list" target="_blank" rel="noopener">
+        <span class="icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l2 2 4-4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="4" width="16" height="16" rx="3" stroke-width="1.8"/></svg>
+        </span>
+        <span class="link-text">
+          <div class="link-title">Checklist for a high-converting listing</div>
+          <div class="link-sub">проавито.рф/check-list</div>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+      <a class="link-row" href="https://proaviagent.ru" target="_blank" rel="noopener">
+        <span class="icon">
+          <svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        </span>
+        <span class="link-text">
+          <div class="link-title">AI manager that handles your leads</div>
+          <div class="link-sub">It’s free</div>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+    </div>
+
+    <h2 class="section-label">Get in touch</h2>
+    <div class="links">
+
+      <a class="link-row primary" href="tel:+79521539258">
+        <span class="icon">
+          <svg viewBox="0 0 24 24"><path d="M6.5 3.5c.4 0 .8.2 1 .6l1.4 2.5c.2.4.2.9-.1 1.3L7.6 9.4c-.3.4-.3.9-.1 1.3.9 1.7 2.3 3.1 4 4 .4.2.9.2 1.3-.1l1.5-1.2c.4-.3.9-.3 1.3-.1l2.5 1.4c.4.2.6.6.6 1v1.8c0 1.1-1 2-2.1 1.8C10.8 18.4 5.6 13.2 4.9 6.4 4.7 5.3 5.6 4.3 6.7 4.3h-.2Z" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        </span>
+        <span class="link-text">
+          <div class="link-title">Call</div>
+          <div class="link-sub">+7 952 153-92-58</div>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+      <a class="link-row" href="https://max.ru/u/f9LHodD0cOIXB-F1u0pDgw0YfGYCEzNh_cnDXEuHyGzvqk4zf6NTt8B4-fg" target="_blank" rel="noopener">
+        <span class="icon">
+          <svg viewBox="0 0 24 24"><path d="M4 6l8 6 8-6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="5" width="18" height="14" rx="2.5" stroke-width="1.8"/></svg>
+        </span>
+        <span class="link-text">
+          <div class="link-title">MAX</div>
+          <div class="link-sub">+7 952 153-92-58</div>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+      <a class="link-row" href="https://t.me/romkatsk" target="_blank" rel="noopener">
+        <span class="icon">
+          <svg viewBox="0 0 24 24"><path d="M22 3 2 11l6 2.5M22 3 15.5 21l-5-7.5M22 3 8.5 13.5v6" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        </span>
+        <span class="link-text">
+          <div class="link-title">Telegram</div>
+          <div class="link-sub">@romkatsk</div>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+      <a class="link-row" href="https://wa.me/79521539258" target="_blank" rel="noopener">
+        <span class="icon">
+          <svg viewBox="0 0 24 24"><path d="M4 20l1.4-4.2A8 8 0 1 1 8.7 19L4 20Z" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 8.7c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .6.4.2.5.6 1.5.6 1.6.1.1.1.3 0 .4-.1.2-.2.3-.3.5-.2.2-.3.3-.1.6.2.4.9 1.3 1.9 2.1 1.3 1 2 1.2 2.3 1.4.3.1.4.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1l1.7.9c.2.1.4.2.4.4.1.5-.1 1.2-.6 1.6-.6.6-1.5.9-2.4.7-1.5-.3-3.2-1.2-4.5-2.5-1.1-1-2-2.3-2.5-3.6-.4-1-.3-2 .3-2.7Z" stroke-width="0.3" fill="currentColor" stroke="currentColor"/></svg>
+        </span>
+        <span class="link-text">
+          <div class="link-title">WhatsApp</div>
+          <div class="link-sub">+7 952 153-92-58</div>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+      <a class="link-row" href="https://проавито.рф" target="_blank" rel="noopener">
+        <span class="icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.8"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.7 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.7-3.8-9S9.5 5.5 12 3Z" stroke-width="1.8"/></svg>
+        </span>
+        <span class="link-text">
+          <div class="link-title">Website</div>
+          <div class="link-sub">проавито.рф</div>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+      <a class="link-row" href="https://vk.ru/romkatsk" target="_blank" rel="noopener">
+        <span class="icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h4c.2 3 1.5 6.8 4 8.3V4h3.8v5.4C17.5 8.6 19 6.4 19.5 4H23c-.5 3-2.5 5.7-4 7 1.7 1.3 3.5 3.7 4.3 7h-3.9c-.6-2-2-3.8-3.9-4.6V18h-.5c-6.5 0-10.4-4.4-10.5-14Z" stroke-width="0" fill="currentColor" class="filled"/></svg>
+        </span>
+        <span class="link-text">
+          <div class="link-title">VK</div>
+          <div class="link-sub">vk.ru/romkatsk</div>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+      <a class="link-row" href="https://instagram.com/romkatsk" target="_blank" rel="noopener">
+        <span class="icon">
+          <svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" class="filled"/></svg>
+        </span>
+        <span class="link-text">
+          <div class="link-title">Instagram</div>
+          <div class="link-sub">@romkatsk</div>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+    </div>
+
+    <footer>
+      <div class="divider"></div>
+      <p>ROMAN CHUMAKIN · MARKETING</p>
+    </footer>
+
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Message copied — paste it into the chat</div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://romkatsk.ru/en/#website",
+        "url": "https://romkatsk.ru/en/",
+        "name": "Roman Chumakin — Marketer",
+        "inLanguage": "en-US",
+        "publisher": { "@id": "https://romkatsk.ru/en/#roman" }
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://romkatsk.ru/en/#page",
+        "url": "https://romkatsk.ru/en/",
+        "name": "Roman Chumakin — Marketer",
+        "inLanguage": "en-US",
+        "isPartOf": { "@id": "https://romkatsk.ru/en/#website" },
+        "primaryImageOfPage": "https://romkatsk.ru/og-cover.jpg",
+        "mainEntity": { "@id": "https://romkatsk.ru/en/#roman" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://romkatsk.ru/en/#roman",
+        "name": "Roman Chumakin",
+        "givenName": "Roman",
+        "familyName": "Chumakin",
+        "jobTitle": "Avito specialist, marketer",
+        "description": "Roman Chumakin — Avito specialist and marketer: promotion on Avito, Russia’s largest classifieds marketplace, Avito and Cian campaigns for property developers, AI chat agents, Yandex Direct ads and business automation. 7 years in marketing. Case studies and contact via MAX, Telegram, WhatsApp.",
+        "url": "https://romkatsk.ru/en/",
+        "image": "https://romkatsk.ru/portrait-504.webp",
+        "telephone": "+7-952-153-92-58",
+        "knowsAbout": [
+          "Avito advertising",
+          "Yandex Direct ads",
+          "Website development",
+          "Business process automation",
+          "Lead generation",
+          "Promoting new-build real estate on Avito and Cian",
+          "AI agents for sales teams"
+        ],
+        "areaServed": { "@type": "Country", "name": "Russia" },
+        "sameAs": [
+          "https://t.me/romkatsk",
+          "https://vk.ru/romkatsk",
+          "https://instagram.com/romkatsk",
+          "https://проавито.рф",
+          "https://proaviagent.ru",
+          "https://proavitor.ru/"
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script>
+  (function(){
+    // every button with a ready-made message: add data-msg and copying just works
+    var links = document.querySelectorAll('[data-msg]');
+    var toast = document.getElementById('toast');
+    if(!links.length || !toast) return;
+    var timer;
+    var DONE = toast.textContent;
+
+    function show(text){
+      toast.textContent = text;
+      toast.classList.add('show');
+      clearTimeout(timer);
+      timer = setTimeout(function(){ toast.classList.remove('show'); }, 4500);
+    }
+
+    function copy(text){
+      try{
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          // if the browser denies clipboard access, show the text itself
+          // so the visitor can copy it by hand
+          navigator.clipboard.writeText(text)['catch'](function(){ show(text); });
+          return true;
+        }
+      }catch(e){}
+      try{
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, text.length);
+        var ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        return ok;
+      }catch(e){ return false; }
+    }
+
+    Array.prototype.forEach.call(links, function(link){
+      link.addEventListener('click', function(){
+        var msg = link.getAttribute('data-msg');
+        if(copy(msg)){
+          show(DONE);
+        } else {
+          show(msg);
+        }
+      });
+    });
+  })();
+  </script>
+
+</body>
+</html>

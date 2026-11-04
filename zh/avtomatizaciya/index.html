@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>业务自动化与 AI 智能体｜罗曼·丘马金 Roman Chumakin</title>
+<meta name="description" content="聊天 AI 客服经理、全渠道统一收件箱与 CRM、自动接单机器人、Avito（俄罗斯最大的分类信息平台）商品自动上架、带通话转写的电话系统、老板专属数据看板。一站式交付的业务自动化，用数字说话。">
+<link rel="canonical" href="https://romkatsk.ru/zh/avtomatizaciya/">
+<meta name="theme-color" content="#060911">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://romkatsk.ru/zh/avtomatizaciya/">
+<meta property="og:title" content="业务自动化与 AI 智能体｜罗曼·丘马金">
+<meta property="og:description" content="让生意几秒内回复客户、不漏掉任何询单，日常琐事自动完成。">
+<meta property="og:image" content="https://romkatsk.ru/og-cover.jpg">
+
+<link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preload" href="/manrope.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/playfair-600.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* Шрифты общие с визиткой и обрезаны по символам: знаков ₽ × → в них нет,
+     поэтому в заголовках и цифрах их не используем (подставится системный). */
+  @font-face{ font-family:'Manrope'; src:url('/manrope.woff2') format('woff2'); font-weight:200 800; font-display:swap; }
+  @font-face{ font-family:'Playfair Display'; src:url('/playfair-600.woff2') format('woff2'); font-weight:600; font-display:swap; }
+  @font-face{ font-family:'IBM Plex Mono'; src:url('/plexmono-400.woff2') format('woff2'); font-weight:400; font-display:swap; }
+
+  :root{
+    --bg-deep:#060911;
+    --bg-panel:#10162a;
+    --bg-panel-hover:#161d38;
+    --accent-blue:#3fa9f5;
+    --accent-cyan:#7fe3ff;
+    --accent-mint:#5ff0b7;
+    --text-primary:#f3f5fa;
+    --text-muted:#8a96b0;
+    --divider:rgba(255,255,255,0.09);
+    --radius:20px;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  html,body{
+    margin:0; padding:0;
+    background:var(--bg-deep);
+    color:var(--text-primary);
+    font-family:'Manrope', system-ui, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  body{ overflow-x:hidden; line-height:1.55; }
+  a{ color:inherit; }
+  b{ font-weight:700; color:#fff; }
+
+  .bg-grid{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(127,227,255,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(127,227,255,0.045) 1px, transparent 1px);
+    background-size:56px 56px;
+    -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+            mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+  }
+  .glow{
+    position:fixed; z-index:0; pointer-events:none; border-radius:50%; filter:blur(40px);
+  }
+  .glow.a{ top:-260px; left:50%; width:900px; height:620px; transform:translateX(-50%);
+    background:radial-gradient(closest-side, rgba(63,169,245,0.28), transparent 70%); }
+  .glow.b{ top:40vh; right:-300px; width:600px; height:600px;
+    background:radial-gradient(closest-side, rgba(95,240,183,0.10), transparent 70%); }
+
+  .wrap{ position:relative; z-index:1; width:100%; max-width:1120px; margin:0 auto; padding:0 20px; }
+
+  /* top bar */
+  .top{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:20px 0;
+  }
+  .back{
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+    font-size:14px; color:var(--text-muted); transition:color .2s;
+  }
+  .back:hover{ color:var(--text-primary); }
+  .back svg{ width:16px; height:16px; }
+  .top-cta{
+    text-decoration:none; font-size:14px; font-weight:600;
+    padding:9px 16px; border-radius:999px;
+    border:1px solid rgba(63,169,245,0.45); background:rgba(63,169,245,0.08);
+    transition:background .2s, border-color .2s;
+  }
+  .top-cta:hover{ background:rgba(63,169,245,0.18); border-color:var(--accent-blue); }
+
+  /* hero */
+  .hero{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;
+    padding:56px 0 72px;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono', "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", monospace; font-size:12.5px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--accent-cyan);
+    padding:7px 14px; border-radius:999px; border:1px solid rgba(127,227,255,0.25); background:rgba(127,227,255,0.05);
+  }
+  .pulse{ width:8px; height:8px; border-radius:50%; background:var(--accent-mint); box-shadow:0 0 0 0 rgba(95,240,183,.6); animation:pulse 2s infinite; }
+  @keyframes pulse{ 0%{box-shadow:0 0 0 0 rgba(95,240,183,.55)} 70%{box-shadow:0 0 0 10px rgba(95,240,183,0)} 100%{box-shadow:0 0 0 0 rgba(95,240,183,0)} }
+
+  h1{
+    font-family:'Playfair Display', Georgia, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", serif; font-weight:600;
+    font-size:clamp(38px, 5.6vw, 68px); line-height:1.04; letter-spacing:-0.015em;
+    margin:22px 0 22px;
+  }
+  .grad{
+    background:linear-gradient(100deg, #fff 0%, var(--accent-cyan) 45%, var(--accent-blue) 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .lead{ font-size:clamp(16px, 1.7vw, 19px); color:#c5cde0; max-width:560px; margin:0 0 32px; }
+
+  .btns{ display:flex; flex-wrap:wrap; gap:12px; }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:10px;
+    text-decoration:none; font-weight:700; font-size:16px;
+    padding:16px 26px; border-radius:14px; min-height:54px;
+    transition:transform .2s, box-shadow .2s, background .2s;
+  }
+  .btn svg{ width:18px; height:18px; }
+  .btn.main{
+    background:linear-gradient(135deg, var(--accent-blue), #2a7bf0);
+    color:#fff; box-shadow:0 10px 34px rgba(63,169,245,0.38), inset 0 1px 0 rgba(255,255,255,.25);
+  }
+  .btn.main:hover{ transform:translateY(-2px); box-shadow:0 16px 44px rgba(63,169,245,0.5), inset 0 1px 0 rgba(255,255,255,.25); }
+  .btn.ghost{ border:1px solid var(--divider); background:rgba(255,255,255,0.03); color:var(--text-primary); }
+  .btn.ghost:hover{ background:rgba(255,255,255,0.07); }
+
+  .trust{ display:flex; flex-wrap:wrap; gap:8px 22px; margin-top:26px; font-size:14px; color:var(--text-muted); }
+  .trust span{ display:inline-flex; align-items:center; gap:8px; }
+  .trust i{ width:6px; height:6px; border-radius:50%; background:var(--accent-cyan); display:inline-block; }
+
+  /* live feed card */
+  .feed{
+    position:relative; border-radius:24px; padding:22px;
+    background:linear-gradient(180deg, rgba(22,29,56,0.92), rgba(16,22,42,0.92));
+    border:1px solid rgba(127,227,255,0.16);
+    box-shadow:0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.02) inset;
+  }
+  .feed::before{
+    content:""; position:absolute; inset:-1px; border-radius:24px; padding:1px; pointer-events:none;
+    background:linear-gradient(140deg, rgba(127,227,255,.55), transparent 35%, transparent 65%, rgba(95,240,183,.4));
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude;
+  }
+  .feed-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+  .feed-title{ font-weight:700; font-size:15px; display:flex; align-items:center; gap:10px; }
+  .feed-note{ font-family:'IBM Plex Mono', "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", monospace; font-size:11.5px; color:var(--text-muted); letter-spacing:.06em; text-transform:uppercase; }
+  .feed-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; height:286px; overflow:hidden; }
+  .ev{
+    display:grid; grid-template-columns:auto 1fr auto; gap:12px; align-items:center;
+    padding:12px 14px; border-radius:14px; background:rgba(255,255,255,0.035); border:1px solid rgba(255,255,255,0.05);
+    animation:evIn .55s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes evIn{ from{ opacity:0; transform:translateY(-10px) scale(.98); } to{ opacity:1; transform:none; } }
+  .ev-ic{ width:34px; height:34px; border-radius:10px; display:grid; place-items:center; background:rgba(63,169,245,0.14); color:var(--accent-cyan); }
+  .ev-ic svg{ width:18px; height:18px; }
+  .ev.ok .ev-ic{ background:rgba(95,240,183,0.13); color:var(--accent-mint); }
+  .ev-t{ font-size:14px; line-height:1.35; }
+  .ev-t small{ display:block; color:var(--text-muted); font-size:12.5px; margin-top:2px; }
+  .ev-time{ font-family:'IBM Plex Mono', "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", monospace; font-size:12px; color:var(--text-muted); }
+
+  /* stats */
+  .stats{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:1px;
+    border-radius:var(--radius); overflow:hidden; background:var(--divider);
+    border:1px solid var(--divider);
+  }
+  .stat{ background:rgba(10,14,28,0.92); padding:26px 22px; }
+  .stat-n{
+    font-family:'Manrope', "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; font-weight:800; letter-spacing:-0.03em; font-size:clamp(32px, 3.6vw, 46px); line-height:1;
+    background:linear-gradient(180deg, #fff, var(--accent-cyan)); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .stat-l{ margin-top:10px; font-size:14px; color:var(--text-muted); line-height:1.4; }
+
+  /* sections */
+  section{ padding:96px 0 0; }
+  .kicker{ font-family:'IBM Plex Mono', "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", monospace; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-blue); }
+  h2{
+    font-family:'Playfair Display', Georgia, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", serif; font-weight:600;
+    font-size:clamp(30px, 4vw, 46px); line-height:1.1; letter-spacing:-0.01em; margin:12px 0 16px; max-width:780px;
+  }
+  .sub{ color:var(--text-muted); font-size:17px; max-width:640px; margin:0 0 40px; }
+
+  /* pains */
+  .pains{ display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; }
+  .pain{
+    display:flex; gap:16px; padding:22px 24px; border-radius:var(--radius);
+    background:rgba(255,90,110,0.04); border:1px solid rgba(255,120,140,0.14);
+  }
+  .pain-x{ flex:none; width:30px; height:30px; border-radius:50%; display:grid; place-items:center; background:rgba(255,110,130,0.12); color:#ff8fa0; }
+  .pain-x svg{ width:14px; height:14px; }
+  .pain p{ margin:0; font-size:16px; color:#d6dbe8; }
+  .pain p b{ display:block; margin-bottom:4px; font-size:17px; }
+  .turn{
+    margin-top:22px; padding:22px 26px; border-radius:var(--radius);
+    background:linear-gradient(100deg, rgba(95,240,183,0.10), rgba(63,169,245,0.08));
+    border:1px solid rgba(95,240,183,0.25); font-size:17px;
+  }
+
+  /* solutions */
+  .sol-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; }
+  .sol{
+    position:relative; padding:26px 24px 24px; border-radius:var(--radius);
+    background:var(--bg-panel); border:1px solid var(--divider);
+    transition:transform .25s, border-color .25s, background .25s;
+    display:flex; flex-direction:column;
+  }
+  .sol:hover{ transform:translateY(-4px); border-color:rgba(63,169,245,0.45); background:var(--bg-panel-hover); }
+  .sol.hot{ border-color:rgba(127,227,255,0.35); background:linear-gradient(180deg, rgba(63,169,245,0.13), var(--bg-panel) 60%); }
+  .badge{
+    position:absolute; top:18px; right:18px; font-size:11.5px; font-weight:700; letter-spacing:.04em;
+    padding:5px 10px; border-radius:999px; background:rgba(95,240,183,0.14); color:var(--accent-mint);
+  }
+  .sol-ic{
+    width:48px; height:48px; border-radius:14px; display:grid; place-items:center; margin-bottom:18px;
+    background:linear-gradient(135deg, rgba(63,169,245,0.25), rgba(127,227,255,0.08));
+    border:1px solid rgba(127,227,255,0.22); color:var(--accent-cyan);
+  }
+  .sol-ic svg{ width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .sol h3{ margin:0 0 8px; font-size:20px; line-height:1.25; }
+  .sol > p{ margin:0 0 16px; color:var(--text-muted); font-size:15px; }
+  .sol ul{ list-style:none; margin:0 0 18px; padding:0; display:flex; flex-direction:column; gap:9px; }
+  .sol li{ position:relative; padding-left:24px; font-size:14.5px; color:#d3d9e7; line-height:1.45; }
+  .sol li::before{
+    content:""; position:absolute; left:0; top:5px; width:14px; height:14px; border-radius:50%;
+    background:rgba(95,240,183,0.16) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235ff0b7' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/9px no-repeat;
+  }
+  .sol-res{
+    margin-top:auto; padding-top:16px; border-top:1px dashed var(--divider);
+    font-size:14px; color:var(--accent-cyan); font-weight:600;
+  }
+
+  /* cases */
+  .cases{ display:grid; grid-template-columns:repeat(2, 1fr); gap:16px; }
+  .case{
+    padding:30px 28px; border-radius:24px; background:var(--bg-panel); border:1px solid var(--divider);
+    display:grid; grid-template-columns:auto 1fr; gap:4px 26px; align-items:start;
+  }
+  .case.wide{ grid-column:1 / -1; background:linear-gradient(120deg, rgba(63,169,245,0.16), rgba(16,22,42,1) 55%); border-color:rgba(127,227,255,0.28); }
+  .case-num{
+    grid-row:span 3;
+    font-family:'Manrope', "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; font-weight:800; letter-spacing:-0.04em; font-size:clamp(44px, 5.6vw, 68px); line-height:.95;
+    background:linear-gradient(180deg, #fff, var(--accent-blue)); -webkit-background-clip:text; background-clip:text; color:transparent;
+    min-width:110px;
+  }
+  .case-num small{ display:block; letter-spacing:0; font-family:'Manrope', "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; font-size:13px; font-weight:600; color:var(--text-muted); -webkit-text-fill-color:var(--text-muted); margin-top:10px; line-height:1.3; max-width:140px; }
+  .case:not(.wide){ grid-template-columns:1fr; }
+  .case:not(.wide) .case-num{ grid-row:auto; margin-bottom:14px; }
+  .case:not(.wide) .case-num small{ max-width:none; }
+  .case-niche{ font-family:'IBM Plex Mono', "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", monospace; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-cyan); }
+  .case h3{ margin:6px 0 10px; font-size:21px; line-height:1.3; }
+  .case p{ margin:0; color:#c5cde0; font-size:15px; }
+  .ba{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px; }
+  .ba div{ padding:12px 14px; border-radius:12px; font-size:14px; line-height:1.4; }
+  .ba .was{ background:rgba(255,110,130,0.07); border:1px solid rgba(255,120,140,0.14); color:#e2c9cf; }
+  .ba .now{ background:rgba(95,240,183,0.07); border:1px solid rgba(95,240,183,0.2); color:#cdeee0; }
+  .ba span{ display:block; font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; margin-bottom:4px; opacity:.8; }
+
+  /* steps */
+  .steps{ display:grid; grid-template-columns:repeat(5, 1fr); gap:14px; counter-reset:s; position:relative; }
+  .step{ position:relative; padding:24px 20px; border-radius:var(--radius); background:var(--bg-panel); border:1px solid var(--divider); }
+  .step::before{
+    counter-increment:s; content:"0" counter(s);
+    font-family:'IBM Plex Mono', "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", monospace; font-size:13px; color:var(--accent-blue);
+    display:inline-block; padding:4px 10px; border-radius:999px; border:1px solid rgba(63,169,245,0.35); margin-bottom:14px;
+  }
+  .step h3{ margin:0 0 6px; font-size:17px; }
+  .step p{ margin:0; font-size:14px; color:var(--text-muted); }
+
+  /* why */
+  .why{ display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; }
+  .why div{ padding:24px 22px; border-radius:var(--radius); border:1px solid var(--divider); background:rgba(255,255,255,0.02); }
+  .why b{ display:block; font-size:17px; margin-bottom:6px; }
+  .why p{ margin:0; font-size:14.5px; color:var(--text-muted); }
+
+  /* faq */
+  .faq{ max-width:820px; display:flex; flex-direction:column; gap:10px; }
+  details{ border-radius:16px; background:var(--bg-panel); border:1px solid var(--divider); transition:border-color .2s; }
+  details[open]{ border-color:rgba(63,169,245,0.4); }
+  summary{
+    list-style:none; cursor:pointer; padding:20px 56px 20px 22px; font-weight:700; font-size:17px; position:relative;
+  }
+  summary::-webkit-details-marker{ display:none; }
+  summary::after{
+    content:""; position:absolute; right:22px; top:50%; width:12px; height:12px; margin-top:-8px;
+    border-right:2px solid var(--accent-cyan); border-bottom:2px solid var(--accent-cyan); transform:rotate(45deg); transition:transform .25s, margin .25s;
+  }
+  details[open] summary::after{ transform:rotate(-135deg); margin-top:-2px; }
+  details p{ margin:0; padding:0 22px 20px; color:#c5cde0; font-size:15.5px; }
+
+  /* final cta */
+  .final{
+    margin:110px 0 40px; padding:clamp(36px, 6vw, 72px) clamp(22px, 5vw, 64px); border-radius:32px; text-align:center;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(127,227,255,0.22), transparent 60%),
+      linear-gradient(180deg, #121a36, #0b1022);
+    border:1px solid rgba(127,227,255,0.25);
+    position:relative; overflow:hidden;
+  }
+  .final h2{ margin:14px auto 14px; }
+  .final .sub{ margin:0 auto 32px; }
+  .final .btns{ justify-content:center; }
+  .msgs{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:16px; }
+  .msgs a{
+    text-decoration:none; font-size:14.5px; font-weight:600; color:var(--text-muted);
+    padding:10px 16px; border-radius:999px; border:1px solid var(--divider); transition:color .2s, border-color .2s;
+  }
+  .msgs a:hover{ color:var(--text-primary); border-color:rgba(255,255,255,0.25); }
+
+  footer{ padding:10px 0 60px; text-align:center; color:var(--text-muted); font-size:13.5px; }
+  footer a{ color:var(--text-muted); }
+
+  /* sticky mobile cta */
+  .sticky{
+    position:fixed; left:12px; right:12px; bottom:calc(12px + env(safe-area-inset-bottom)); z-index:6;
+    display:none; transform:translateY(140%); transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .sticky.on{ transform:none; }
+  .sticky .btn{ width:100%; }
+
+  .toast{
+    position:fixed; left:50%; bottom:90px; transform:translate(-50%, 14px);
+    max-width:calc(100vw - 40px); padding:12px 18px; border-radius:12px;
+    background:var(--bg-panel-hover); border:1px solid rgba(63,169,245,0.45); box-shadow:0 14px 40px rgba(0,0,0,0.5);
+    font-size:13.5px; line-height:1.4; text-align:center; opacity:0; pointer-events:none;
+    transition:opacity .22s, transform .22s; z-index:7;
+  }
+  .toast.show{ opacity:1; transform:translate(-50%, 0); }
+
+  /* появление при прокрутке: без JS всё видно сразу */
+  .js .rv{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+  .js .rv.in{ opacity:1; transform:none; }
+
+  @media (max-width: 980px){
+    .hero{ grid-template-columns:1fr; gap:40px; padding-top:28px; }
+    .sol-grid{ grid-template-columns:repeat(2, 1fr); }
+    .steps{ grid-template-columns:repeat(2, 1fr); }
+    .why{ grid-template-columns:repeat(2, 1fr); }
+    .stats{ grid-template-columns:repeat(2, 1fr); }
+  }
+  @media (max-width: 680px){
+    .wrap{ padding:0 16px; }
+    section{ padding-top:72px; }
+    .pains, .sol-grid, .cases, .why{ grid-template-columns:1fr; }
+    .steps{ grid-template-columns:1fr; }
+    .case{ grid-template-columns:1fr; padding:26px 22px; }
+    .case-num{ grid-row:auto; margin-bottom:8px; }
+    .case-num small{ max-width:none; }
+    .ba{ grid-template-columns:1fr; }
+    .btns .btn{ width:100%; }
+    .top-cta{ display:none; }
+    .sticky{ display:block; }
+    .stat{ padding:20px 16px; }
+    .feed-list{ height:318px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition-duration:0.01ms !important; }
+    html{ scroll-behavior:auto; }
+    .js .rv{ opacity:1; transform:none; }
+  }
+  /* zh-CN: no wide letter-spacing on CJK text */
+  html[lang="zh-CN"] .eyebrow, html[lang="zh-CN"] .feed-note, html[lang="zh-CN"] .kicker,
+  html[lang="zh-CN"] .case-niche, html[lang="zh-CN"] .ba span, html[lang="zh-CN"] .badge{ letter-spacing:normal; }
+</style>
+<!-- Yandex.Metrika counter 113221102 -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){
+m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();
+for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113221102', 'ym');
+ym(113221102, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113221102" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<script>
+document.documentElement.className += ' js';
+/* Цели: клики по мессенджерам (те же, что на визитке) */
+(function(){var ID=113221102;function g(n){try{ym(ID,'reachGoal',n)}catch(e){}}
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';
+if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('click_max');else if(/wa\.me|whatsapp/.test(h))g('click_whatsapp');},true);})();
+</script>
+<!-- LANG-SWITCH -->
+<link rel="alternate" hreflang="ru" href="https://romkatsk.ru/avtomatizaciya/">
+<link rel="alternate" hreflang="en" href="https://romkatsk.ru/en/avtomatizaciya/">
+<link rel="alternate" hreflang="zh-Hans" href="https://romkatsk.ru/zh/avtomatizaciya/">
+<link rel="alternate" hreflang="x-default" href="https://romkatsk.ru/avtomatizaciya/">
+<script>
+(function(){
+  var K='rk-lang', d=document.documentElement, cur=(d.lang||'ru').slice(0,2);
+  function save(l){try{localStorage.setItem(K,l)}catch(e){}}
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-setlang]');if(a)save(a.getAttribute('data-setlang'))},true);
+  try{
+    if(/bot|crawl|spider|slurp|yandex|google|bing|baidu|lighthouse|headless|preview/i.test(navigator.userAgent))return;
+    if(localStorage.getItem(K))return;
+    if(document.referrer&&document.referrer.indexOf(location.origin)===0)return;
+    var ls=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||'']).map(function(l){return String(l).toLowerCase().slice(0,2)});
+    var want=null;
+    for(var i=0;i<ls.length;i++){if(ls[i]==='ru'||ls[i]==='en'||ls[i]==='zh'){want=ls[i];break}}
+    if(!want)want=ls.some(function(l){return /^(uk|be|kk|ky|uz|tg|hy|az|ka|tt|ba|mn)$/.test(l)})?'ru':'en';
+    save(want);
+    if(want===cur)return;
+    var rest=location.pathname.replace(/^\/(en|zh)(\/|$)/,'/');
+    location.replace((want==='ru'?'':'/'+want)+rest+location.search+location.hash);
+  }catch(e){}
+})();
+</script>
+<style>
+  .lang{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--divider);border-radius:999px;
+    background:rgba(16,22,42,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    font:600 12px/1 'Manrope',system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;letter-spacing:.02em}
+  .lang a{display:inline-flex;align-items:center;justify-content:center;min-width:34px;min-height:30px;padding:0 10px;
+    border-radius:999px;color:var(--text-muted);text-decoration:none;transition:color .2s,background .2s}
+  .lang a:hover{color:var(--text-primary)}
+  .lang a:focus-visible{outline:2px solid var(--accent-blue);outline-offset:1px}
+  .lang a[aria-current]{color:var(--text-primary);background:rgba(63,169,245,.18)}
+  .lang-float{position:absolute;top:14px;right:14px;z-index:5}
+  .top .lang{margin-left:auto}
+</style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="glow a"></div>
+  <div class="glow b"></div>
+
+  <div class="wrap">
+
+    <header class="top">
+      <a class="back" href="/zh/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+        罗曼·丘马金
+      </a>
+      <nav class="lang" aria-label="Language / Язык / 语言"><a href="/avtomatizaciya/" hreflang="ru" lang="ru" data-setlang="ru" title="Русский">RU</a><a href="/en/avtomatizaciya/" hreflang="en" lang="en" data-setlang="en" title="English">EN</a><a href="/zh/avtomatizaciya/" hreflang="zh" lang="zh" data-setlang="zh" title="中文" aria-current="page">中文</a></nav>
+      <a class="top-cta" href="https://max.ru/u/f9LHodD0cOIXB-F1u0pDgw0YfGYCEzNh_cnDXEuHyGzvqk4zf6NTt8B4-fg" target="_blank" rel="noopener"
+         data-msg="您好！我想聊聊我公司的业务自动化。">聊聊需求</a>
+    </header>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div>
+        <span class="eyebrow"><span class="pulse"></span>业务自动化与 AI 智能体</span>
+        <h1>让生意<span class="grad">在您睡觉时照常运转</span></h1>
+        <p class="lead">我为企业部署 AI 客服经理、CRM、机器人和商品自动上架。它们几秒内回复客户，不漏掉任何一条询单，日常琐事自动完成，而您能用数字清楚看到成果。</p>
+        <div class="btns">
+          <a class="btn main" href="https://max.ru/u/f9LHodD0cOIXB-F1u0pDgw0YfGYCEzNh_cnDXEuHyGzvqk4zf6NTt8B4-fg" target="_blank" rel="noopener"
+             data-msg="您好！我想聊聊我公司的业务自动化。">
+            聊聊我的需求
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn ghost" href="#resheniya">哪些工作可以自动化</a>
+        </div>
+        <div class="trust">
+          <span><i></i>7 年营销与销售经验</span>
+          <span><i></i>我自己的代理公司就在用这套系统</span>
+          <span><i></i>一站式交付，您无需配备程序员</span>
+        </div>
+      </div>
+
+      <div class="feed" aria-label="示例：自动化系统一个晚上都做了什么">
+        <div class="feed-head">
+          <div class="feed-title"><span class="pulse"></span>晚上 23:00 的您的生意</div>
+          <div class="feed-note">示例</div>
+        </div>
+        <ul class="feed-list" id="feed"></ul>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats rv">
+      <div class="stat"><div class="stat-n">26</div><div class="stat-l">个账户已由我的 AI 智能体托管</div></div>
+      <div class="stat"><div class="stat-n">17,000+</div><div class="stat-l">条接单回复由机器人在接单平台上发出</div></div>
+      <div class="stat"><div class="stat-n">4.7倍</div><div class="stat-l">客户启用自动上架后，商品信息数量增长</div></div>
+      <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">全年无休，不请假、不休病假</div></div>
+    </div>
+
+    <!-- PAINS -->
+    <section>
+      <div class="kicker rv">似曾相识？</div>
+      <h2 class="rv">生意每天都在细节上流失金钱</h2>
+      <p class="sub rv">这些损失在报表里看不到，但凡是通过聊天、电话和平台做销售的人，都在为它买单。</p>
+      <div class="pains">
+        <div class="pain rv"><span class="pain-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+          <p><b>客户晚上发来消息，第二天早上才回复</b>一夜之间，他已经从最先回复的人那里买好了。</p></div>
+        <div class="pain rv"><span class="pain-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+          <p><b>询单分散在五个渠道里</b>Avito（俄罗斯最大的分类信息平台）、Telegram、WhatsApp、MAX、官网。总有一部分会丢失，却没人知道丢的是哪些。</p></div>
+        <div class="pain rv"><span class="pain-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+          <p><b>销售经理想怎么干就怎么干</b>有人没回电话，有人把客户忘了。在钱流失之前，您根本无从核查。</p></div>
+        <div class="pain rv"><span class="pain-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+          <p><b>琐事吞噬大量时间</b>商品、价格、报表和文件都靠手工搬运。员工拿着工资，干的却是机器人的活。</p></div>
+      </div>
+      <div class="turn rv"><b>这些问题都可以靠自动化解决。</b>不是“为了 AI 而上 AI”，而是用具体的系统，堵住具体的资金漏洞。</div>
+    </section>
+
+    <!-- SOLUTIONS -->
+    <section id="resheniya">
+      <div class="kicker rv">解决方案</div>
+      <h2 class="rv">我能自动化哪些工作</h2>
+      <p class="sub rv">每一套方案都已在真实业务中运行。我会按您的需求来搭建：可以是单个方案，也可以是多个方案的组合。</p>
+
+      <div class="sol-grid">
+
+        <article class="sol hot rv">
+          <span class="badge">热门</span>
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/><path d="M9 10h.01M12 10h.01M15 10h.01" stroke-width="2.6"/></svg></div>
+          <h3>聊天 AI 客服经理</h3>
+          <p>在 Avito、Telegram、MAX、WhatsApp 和官网上回复客户。全天候在线，几秒内响应。</p>
+          <ul>
+            <li>熟悉您的价目表、服务和资料</li>
+            <li>引导客户走到通话、上门测量或提交询单</li>
+            <li>必要时把对话转交给真人</li>
+            <li>每条询单都会通过 Telegram 通知您</li>
+          </ul>
+          <div class="sol-res">没有一位客户需要等到天亮</div>
+        </article>
+
+        <article class="sol rv">
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></div>
+          <h3>统一收件箱与 CRM</h3>
+          <p>所有聊天渠道汇入同一个消息流和销售漏斗。同一客户在不同通讯软件里的记录，按手机号自动合并。</p>
+          <ul>
+            <li>看板、交易阶段、沉默客户提醒</li>
+            <li>AI 按 10 分制为销售经理的每段对话打分</li>
+            <li>通话及录音直接显示在客户卡片中</li>
+            <li>从 Bitrix24 迁移，不丢数据、不产生重复</li>
+          </ul>
+          <div class="sol-res">每位客户、每位销售经理都一目了然</div>
+        </article>
+
+        <article class="sol hot rv">
+          <span class="badge">询单源源不断</span>
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M13 3L4 14h7l-1 7 9-11h-7z"/></svg></div>
+          <h3>接单平台自动回复机器人</h3>
+          <p>24/7 盯着各平台上的新订单，趁竞争对手还在睡觉，抢先第一个回复。</p>
+          <ul>
+            <li>按语义筛选订单，而不是只看关键词</li>
+            <li>为每个订单撰写个性化回复</li>
+            <li>持续跟进对话，主动唤回不再回复的客户</li>
+            <li>只使用平台的免费额度</li>
+          </ul>
+          <div class="sol-res">单个项目每天最多 597 条回复</div>
+        </article>
+
+        <article class="sol rv">
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div>
+          <h3>社群询单捕获</h3>
+          <p>监控行业相关的 Telegram 群聊，找出此刻正在寻找服务商的人。</p>
+          <ul>
+            <li>AI 能区分真实需求与竞争对手的广告</li>
+            <li>几分钟内私信首次联系，而不是等上一整天</li>
+            <li>后续对话由您或 AI 客服经理接手</li>
+          </ul>
+          <div class="sol-res">相关话题中每四条消息就有一条是潜在客户</div>
+        </article>
+
+        <article class="sol hot rv">
+          <span class="badge">适合商品零售</span>
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/></svg></div>
+          <h3>Avito 商品自动上架</h3>
+          <p>从 1C、Google 表格或供应商 API 自动生成成千上万条商品信息，无需手工操作。</p>
+          <ul>
+            <li>SEO 文案、加价、图片、规格参数</li>
+            <li>价格和库存自动更新</li>
+            <li>按货号和图片查重，杜绝重复</li>
+            <li>发布前自动检查错误</li>
+          </ul>
+          <div class="sol-res">商品信息从 2,669 条增加到约 12,600 条</div>
+        </article>
+
+        <article class="sol rv">
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></div>
+          <h3>电话系统与外呼</h3>
+          <p>按部门分配号码，直接在浏览器中拨打电话，批量外呼客户名单，每通电话都必须记录结果。</p>
+          <ul>
+            <li>通话录音及文字转写</li>
+            <li>根据号码识别客户所在地区和时区</li>
+            <li>一键按税号核查企业信息</li>
+            <li>来电只转给负责对应区域的人员</li>
+          </ul>
+          <div class="sol-res">不漏接任何电话，每通电话都有结果</div>
+        </article>
+
+        <article class="sol rv">
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
+          <h3>老板专属数据看板</h3>
+          <p>业务数据集中在一个屏幕上，而不是装在销售经理的脑子里，也不是散落在十张表格里。</p>
+          <ul>
+            <li>CRM 数据每 15 分钟更新一次</li>
+            <li>KPI、“谁卡住了”、交易红绿灯</li>
+            <li>按月 P&amp;L：收入、支出、利润率</li>
+          </ul>
+          <div class="sol-res">用数据管理生意，而不是凭感觉</div>
+        </article>
+
+        <article class="sol rv">
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></div>
+          <h3>文件与日常琐事</h3>
+          <p>员工按模板重复做的工作，都交给系统来完成。</p>
+          <ul>
+            <li>一键生成品牌风格的演示文稿</li>
+            <li>拍下图纸即可出报价：AI 识图，程序计算</li>
+            <li>发票、验收单及欠款催缴提醒</li>
+          </ul>
+          <div class="sol-res">几小时的琐事缩短到几分钟</div>
+        </article>
+
+        <article class="sol rv">
+          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div>
+          <h3>Telegram 社群与内容运营</h3>
+          <p>群聊秩序井然，内容定期更新，无需手工操作。</p>
+          <ul>
+            <li>反垃圾：一次封禁，在您所有群聊中同时生效</li>
+            <li>在一个面板中管理数十个群组</li>
+            <li>针对细分行业撰写 SEO 文章，并追踪每位客户来自哪篇文章</li>
+          </ul>
+          <div class="sol-res">管理员再也不用手动清理群聊</div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CASES -->
+    <section id="kejsy">
+      <div class="kicker rv">案例</div>
+      <h2 class="rv">用数字说话的成果</h2>
+      <p class="sub rv">公司名称不予公开：客户的隐私比漂亮的展示更重要。数字均为真实数据。</p>
+
+      <div class="cases">
+
+        <div class="case wide rv">
+          <div class="case-num">4.7x<small>商品信息增长，无需手工操作</small></div>
+          <div>
+            <div class="case-niche">二手汽车配件</div>
+            <h3>成千上万个配件自动上架 Avito</h3>
+            <p>供应商仓库直接对接 Avito。系统自动加价、撰写 SEO 文案、标注适配车型并清除重复信息。客户无需参与具体流程。</p>
+            <div class="ba">
+              <div class="was"><span>之前</span>2,669 条商品信息，全靠手工维护</div>
+              <div class="now"><span>现在</span>约 12,600 条商品信息，审核零错误</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case rv">
+          <div class="case-num">26<small>个账户由 AI 智能体托管</small></div>
+          <div>
+            <div class="case-niche">Avito 销售</div>
+            <h3>AI 客服经理全天候回复客户</h3>
+            <p>超过 1,400 段对话。老板可自行接入智能体，询单通过 Telegram 通知。</p>
+          </div>
+        </div>
+
+        <div class="case rv">
+          <div class="case-num">17,000+<small>条订单回复</small></div>
+          <div>
+            <div class="case-niche">服务业，接单平台</div>
+            <h3>机器人总是第一个响应订单</h3>
+            <p>每天最多 597 条回复。在其中一个平台上，43.6% 的客户会回复。</p>
+          </div>
+        </div>
+
+        <div class="case rv">
+          <div class="case-num">3倍<small>有来有回的对话后，成交率高出</small></div>
+          <div>
+            <div class="case-niche">400+ 段对话分析</div>
+            <h3>促成成交的不是价格，而是对话深度</h3>
+            <p>客户只发一条消息时，成交率为 16%；发到七条及以上时，成交率达到 46%。所以 AI 不会中途放弃对话，而是温和地持续推进。</p>
+          </div>
+        </div>
+
+        <div class="case rv">
+          <div class="case-num">15分钟<small>数据即刷新一次</small></div>
+          <div>
+            <div class="case-niche">法律服务</div>
+            <h3>老板一眼看出交易卡在哪里</h3>
+            <p>将 Bitrix24 接入数据看板：部门 KPI、“谁卡住了”和交易红绿灯一目了然，不再在聊天里来回转发表格。</p>
+          </div>
+        </div>
+
+        <div class="case rv">
+          <div class="case-num">1:1<small>与原服务结果完全一致</small></div>
+          <div>
+            <div class="case-niche">工业设备</div>
+            <h3>停用了第三方服务的付费订阅</h3>
+            <p>商品信息现在直接从客户的 Google 表格生成：图片、文案、Avito 错误检查一应俱全。第一次导出就与原来的结果完全一致。</p>
+          </div>
+        </div>
+
+        <div class="case rv">
+          <div class="case-num">1次封禁<small>在俱乐部所有群聊中同时生效</small></div>
+          <div>
+            <div class="case-niche">商业俱乐部</div>
+            <h3>垃圾信息消失，管理员解放双手</h3>
+            <p>基于评分和垃圾账号库的反垃圾机制：一次封禁，在俱乐部所有群聊中同时生效。俱乐部旗下学校所需的 8 份演示文稿，一键即可生成。</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- STEPS -->
+    <section>
+      <div class="kicker rv">合作流程</div>
+      <h2 class="rv">从一次沟通到系统上线运行</h2>
+      <p class="sub rv">您不用写需求文档，也不用找程序员。只需要一次沟通，再提供相关权限。</p>
+      <div class="steps">
+        <div class="step rv"><h3>诊断</h3><p>通个电话，找出生意在哪些环节流失金钱和时间。</p></div>
+        <div class="step rv"><h3>方案与报价</h3><p>明确要做什么、达到什么结果、费用是多少。</p></div>
+        <div class="step rv"><h3>原型</h3><p>正式上线前，先用您的真实数据演示效果。</p></div>
+        <div class="step rv"><h3>上线</h3><p>接入您的各个渠道，并教会团队如何使用。</p></div>
+        <div class="step rv"><h3>运维支持</h3><p>系统 24/7 监控：一旦出故障，我几分钟内就会知道，而不是等客户来反馈。</p></div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section>
+      <div class="kicker rv">为什么选我</div>
+      <h2 class="rv">我卖的不是技术，而是结果</h2>
+      <div class="why">
+        <div class="rv"><b>亲身验证</b><p>我的代理公司正用这些系统服务 36 位客户。您得到的是已经跑通的方案。</p></div>
+        <div class="rv"><b>懂销售</b><p>7 年营销经验：在我的帮助下，客户累计收入超过6500万卢布。</p></div>
+        <div class="rv"><b>AI 可控</b><p>不乱报价格，不乱许承诺。涉及金额的计算由程序完成，而不是交给神经网络。</p></div>
+        <div class="rv"><b>数据安全</b><p>客户个人数据依照俄罗斯联邦第152号法律《个人数据法》，通过俄罗斯本土模型处理。</p></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+      <div class="kicker rv">问答</div>
+      <h2 class="rv">常见问题</h2>
+      <div class="faq">
+        <details class="rv"><summary>费用是多少？</summary>
+          <p>取决于具体需求：单个 AI 客服经理和“CRM + 机器人 + 自动上架”组合的价格不同。简短诊断后我会给出报价，并在开工前锁定价格，避免任何意外。</p></details>
+        <details class="rv"><summary>上线需要多长时间？</summary>
+          <p>简单的机器人或 AI 客服经理几天即可上线，包含 CRM 和系统集成的方案需要几周。具体工期在诊断时告知。</p></details>
+        <details class="rv"><summary>万一 AI 回复客户时说了蠢话怎么办？</summary>
+          <p>AI 只依据您的知识库作答：价目表、服务和资料。系统设有禁用词和规则。遇到复杂情况，它会把对话转交给真人，并立即通过 Telegram 通知您。</p></details>
+        <details class="rv"><summary>我需要自己配备程序员吗？</summary>
+          <p>不需要。我提供一站式交付，之后负责系统运维。您只需提供权限和反馈。</p></details>
+        <details class="rv"><summary>我的生意规模很小，也需要这些吗？</summary>
+          <p>往往正是小生意最需要：一个 AI 客服经理就能顶上晚上和周末，否则这些时段要么得雇人，要么得您亲自顶上。</p></details>
+      </div>
+    </section>
+
+    <!-- FINAL -->
+    <div class="final rv" id="svyaz">
+      <span class="eyebrow"><span class="pulse"></span>免费诊断</span>
+      <h2>告诉我您被哪些琐事缠身，我来告诉您哪些可以自动化</h2>
+      <p class="sub">只需一次沟通，您就会知道能为生意找回多少钱和时间。不附带任何义务。</p>
+      <div class="btns">
+        <a class="btn main" href="https://max.ru/u/f9LHodD0cOIXB-F1u0pDgw0YfGYCEzNh_cnDXEuHyGzvqk4zf6NTt8B4-fg" target="_blank" rel="noopener"
+           data-msg="您好！我想预约一次免费诊断：看看我的生意里哪些工作可以自动化。">
+          在 MAX 上发消息
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="msgs">
+        <a href="https://t.me/romkatsk" target="_blank" rel="noopener">Telegram</a>
+        <a href="https://wa.me/79521539258" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+
+    <footer>罗曼·丘马金 · <a href="/zh/">romkatsk.ru</a></footer>
+  </div>
+
+  <div class="sticky" id="sticky">
+    <a class="btn main" href="https://max.ru/u/f9LHodD0cOIXB-F1u0pDgw0YfGYCEzNh_cnDXEuHyGzvqk4zf6NTt8B4-fg" target="_blank" rel="noopener"
+       data-msg="您好！我想聊聊我公司的业务自动化。">聊聊我的需求</a>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">消息文本已复制，请粘贴到聊天窗口中</div>
+
+  <script>
+  /* Лента-пример на первом экране: события по кругу */
+  (function(){
+    var feed = document.getElementById('feed');
+    if(!feed) return;
+    var I = {
+      chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4z"/></svg>',
+      ok:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+      bolt:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3L4 14h7l-1 7 9-11h-7z"/></svg>',
+      box:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5z"/><path d="M3 8v8l9 5 9-5V8"/></svg>',
+      phone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>',
+      chart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>'
+    };
+    var EV = [
+      ['chat','AI 在 Avito 上回复了客户','询问价格和工期 · 用时 8 秒','23:02',0],
+      ['ok','CRM 收到新询单','电话、城市、预算已录入客户卡片','23:04',1],
+      ['bolt','机器人第一个回复了订单','针对需求的个性化文案','23:17',0],
+      ['phone','未接来电','已为销售经理创建 9:00 回电任务','23:31',0],
+      ['box','价格和库存已更新','Avito 上的 1,240 件商品','00:00',1],
+      ['chat','AI 唤回了沉默的客户','客户回复：“好的，来上门测量吧”','00:46',1],
+      ['chart','夜间报告已发送到 Telegram','7 条询单 · 0 条遗漏','07:30',1]
+    ];
+    var shown = window.innerWidth <= 680 ? 3 : 4, i = 0;
+    function item(e){
+      var li = document.createElement('li');
+      li.className = 'ev' + (e[4] ? ' ok' : '');
+      li.innerHTML = '<span class="ev-ic">'+I[e[0]]+'</span><span class="ev-t">'+e[1]+'<small>'+e[2]+'</small></span><span class="ev-time">'+e[3]+'</span>';
+      return li;
+    }
+    function push(){
+      feed.insertBefore(item(EV[i % EV.length]), feed.firstChild);
+      i++;
+      while(feed.children.length > shown) feed.removeChild(feed.lastChild);
+    }
+    for(var k=0;k<shown;k++) push();
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduce) setInterval(function(){ if(!document.hidden) push(); }, 2600);
+  })();
+
+  /* Появление блоков при прокрутке */
+  (function(){
+    var els = document.querySelectorAll('.rv');
+    if(!('IntersectionObserver' in window)){ Array.prototype.forEach.call(els, function(el){ el.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin:'0px 0px -8% 0px', threshold:0.08 });
+    Array.prototype.forEach.call(els, function(el){ io.observe(el); });
+  })();
+
+  /* Липкая кнопка на телефоне: после первого экрана, прячется у финального блока */
+  (function(){
+    var s = document.getElementById('sticky'), fin = document.getElementById('svyaz');
+    if(!s || !fin) return;
+    function upd(){
+      var r = fin.getBoundingClientRect();
+      var on = window.scrollY > window.innerHeight * 0.8 && r.top > window.innerHeight;
+      s.classList.toggle('on', on);
+    }
+    window.addEventListener('scroll', upd, { passive:true });
+    upd();
+  })();
+
+  /* Кнопки MAX: готовая фраза копируется в буфер (как на визитке) */
+  (function(){
+    var links = document.querySelectorAll('[data-msg]');
+    var toast = document.getElementById('toast');
+    if(!links.length || !toast) return;
+    var timer, DONE = toast.textContent;
+    function show(text){
+      toast.textContent = text;
+      toast.classList.add('show');
+      clearTimeout(timer);
+      timer = setTimeout(function(){ toast.classList.remove('show'); }, 4500);
+    }
+    function copy(text){
+      try{
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(text)['catch'](function(){ show(text); });
+          return true;
+        }
+      }catch(e){}
+      try{
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.setAttribute('readonly','');
+        ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+        document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
+        var ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        return ok;
+      }catch(e){ return false; }
+    }
+    Array.prototype.forEach.call(links, function(link){
+      link.addEventListener('click', function(){
+        var msg = link.getAttribute('data-msg');
+        show(copy(msg) ? DONE : msg);
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
