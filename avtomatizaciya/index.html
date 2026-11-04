@@ -639,11 +639,39 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
   .lead .res.ok{color:var(--accent-mint,#5ff0b7)} .lead .res.bad{color:#ff8a80}
   :root[data-theme="light"] .lead .res.ok{color:#0f7a4f} :root[data-theme="light"] .lead .res.bad{color:#c62828}
 </style>
+<!-- ANTI-SLOP -->
+<style>
+/* Без декоративных эффектов типового ИИ-лендинга: свечений, сетки, градиентного текста,
+   иконок в плашках, бейджей, проявления при прокрутке. Лежит последним, поэтому !important
+   нужен только против правил светлой темы с более высокой специфичностью. */
+:root,:root[data-theme="light"]{ --radius:10px; }
+.pulse,.pain-x{ display:none !important; }
+.grad,.stat-n,.case-num{ background:none !important; -webkit-background-clip:border-box !important;
+  background-clip:border-box !important; color:inherit !important; }
+.eyebrow,.case-niche{ font-family:'Manrope',system-ui,sans-serif !important; text-transform:none !important;
+  letter-spacing:0 !important; font-size:15px !important; font-weight:600; }
+.eyebrow{ padding:0 !important; border:0 !important; background:none !important; color:var(--text-muted) !important; }
+.case-niche{ color:var(--text-muted) !important; }
+.hero .lead{ max-width:560px; margin:0 0 32px; display:block; text-align:left; }
+.btn,.feed,.sol,.case,.step,.final,.why > div,.faq details{ box-shadow:none !important; }
+.feed,.sol,.case,.case.wide,.final{ background:var(--bg-panel) !important; }
+.sol:hover{ transform:none !important; }
+.sol li::before{ width:6px !important; height:6px !important; top:.62em !important; border-radius:0 !important;
+  background:var(--text-muted) !important; }
+.pain{ background:none !important; border:0 !important; border-top:1px solid var(--divider) !important;
+  border-radius:0 !important; padding:18px 0 !important; }
+.stats{ grid-template-columns:repeat(3,1fr) !important; }
+@media (max-width:640px){ .stats{ grid-template-columns:1fr !important; } }
+.feed,.feed::before,.case,details{ border-radius:var(--radius) !important; }
+.btn.main{ background:#2a7bf0 !important; }
+:root[data-theme="light"] .btn.main{ background:#1667c9 !important; }
+.btn.main:hover{ transform:none !important; filter:brightness(1.08); }
+.step::before{ font-family:'Manrope',system-ui,sans-serif !important; font-weight:700; padding:0 !important;
+  border:0 !important; background:none !important; border-radius:0 !important; color:var(--text-muted) !important; }
+.js .rv{ opacity:1 !important; transform:none !important; transition:none !important; }
+</style>
 </head>
 <body>
-  <div class="bg-grid"></div>
-  <div class="glow a"></div>
-  <div class="glow b"></div>
 
   <div class="wrap">
 
@@ -660,9 +688,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
     <!-- HERO -->
     <div class="hero">
       <div>
-        <span class="eyebrow"><span class="pulse"></span>Автоматизация бизнеса и ИИ-агенты</span>
-        <h1>Бизнес, который <span class="grad">работает, пока вы&nbsp;спите</span></h1>
-        <p class="lead">Внедряю ИИ-менеджеров, CRM, ботов и автозагрузки. Они отвечают клиентам за секунды, не теряют ни одной заявки и сами делают рутину, а вы видите результат в цифрах.</p>
+        <span class="eyebrow">Автоматизация бизнеса и ИИ-агенты</span>
+        <h1>Автоматизирую заявки, переписку и&nbsp;рутину</h1>
+        <p class="lead">ИИ-менеджер отвечает клиентам вечером и в выходные. CRM собирает переписку из всех мессенджеров в одну ленту. Автозагрузка сама выкладывает товары на Авито.</p>
         <div class="btns">
           <a class="btn main" href="https://max.ru/u/f9LHodD0cOIXB-F1u0pDgw0YfGYCEzNh_cnDXEuHyGzvqk4zf6NTt8B4-fg" target="_blank" rel="noopener"
              data-msg="Здравствуйте! Хочу обсудить автоматизацию для моего бизнеса.">
@@ -680,7 +708,7 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
       <div class="feed" aria-label="Пример того, что делает автоматизация за вечер">
         <div class="feed-head">
-          <div class="feed-title"><span class="pulse"></span>Ваш бизнес в 23:00</div>
+          <div class="feed-title">Ваш бизнес в 23:00</div>
           <div class="feed-note">пример</div>
         </div>
         <ul class="feed-list" id="feed"></ul>
@@ -692,38 +720,28 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
       <div class="stat"><div class="stat-n">26</div><div class="stat-l">кабинетов уже ведёт мой ИИ-агент</div></div>
       <div class="stat"><div class="stat-n">17 000+</div><div class="stat-l">откликов отправили боты на биржах заказов</div></div>
       <div class="stat"><div class="stat-n">в 4,7 раза</div><div class="stat-l">больше объявлений у клиента после автозагрузки</div></div>
-      <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">без выходных, отпусков и больничных</div></div>
     </div>
 
     <!-- PAINS -->
     <section>
-      <div class="kicker rv">Знакомо?</div>
-      <h2 class="rv">Каждый день бизнес теряет деньги на&nbsp;мелочах</h2>
-      <p class="sub rv">Эти потери не видны в отчётах, но их платит каждый, кто продаёт через чаты, звонки и площадки.</p>
+      <h2 class="rv">Где обычно теряются заявки</h2>
+      <p class="sub rv">С этим ко мне приходят чаще всего.</p>
       <div class="pains">
-        <div class="pain rv"><span class="pain-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-          <p><b>Клиент написал вечером, ответили утром</b>За ночь он уже купил у того, кто ответил первым.</p></div>
-        <div class="pain rv"><span class="pain-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-          <p><b>Заявки разбросаны по пяти мессенджерам</b>Авито, Telegram, WhatsApp, MAX, сайт. Часть теряется, и никто не знает какая.</p></div>
-        <div class="pain rv"><span class="pain-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-          <p><b>Менеджеры работают как хотят</b>Кто-то не перезвонил, кто-то забыл про клиента. Проверить нечем, пока не уйдут деньги.</p></div>
-        <div class="pain rv"><span class="pain-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-          <p><b>Рутина съедает часы</b>Товары, цены, отчёты и документы переносят руками. Сотрудник стоит денег, а делает работу робота.</p></div>
+        <div class="pain rv"><p><b>Клиент написал вечером, ответили утром</b>За ночь он уже купил у того, кто ответил первым.</p></div>
+        <div class="pain rv"><p><b>Заявки разбросаны по пяти мессенджерам</b>Авито, Telegram, WhatsApp, MAX, сайт. Часть теряется, и никто не знает какая.</p></div>
+        <div class="pain rv"><p><b>Менеджеры работают как хотят</b>Кто-то не перезвонил, кто-то забыл про клиента. Проверить нечем.</p></div>
+        <div class="pain rv"><p><b>Рутина съедает часы</b>Товары, цены, отчёты и документы переносят руками.</p></div>
       </div>
-      <div class="turn rv"><b>Всё это решается автоматизацией.</b> Не «внедрением ИИ ради ИИ», а конкретными системами, которые закрывают конкретную дыру в деньгах.</div>
     </section>
 
     <!-- SOLUTIONS -->
     <section id="resheniya">
-      <div class="kicker rv">Решения</div>
       <h2 class="rv">Что я автоматизирую</h2>
-      <p class="sub rv">Каждое решение уже работает в реальном бизнесе. Собираю под вашу задачу: одно решение или связку из нескольких.</p>
+      <p class="sub rv">Всё это уже работает у клиентов. Можно взять одно решение или связку из нескольких.</p>
 
       <div class="sol-grid">
 
-        <article class="sol hot rv">
-          <span class="badge">Хит</span>
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/><path d="M9 10h.01M12 10h.01M15 10h.01" stroke-width="2.6"/></svg></div>
+        <article class="sol rv">
           <h3>ИИ-менеджер в чатах</h3>
           <p>Отвечает клиентам на Авито, в Telegram, MAX, WhatsApp и на сайте. Круглосуточно, за секунды.</p>
           <ul>
@@ -732,11 +750,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>Передаёт диалог человеку, когда это нужно</li>
             <li>Сообщает о каждой заявке в Telegram</li>
           </ul>
-          <div class="sol-res">Ни один клиент не ждёт до утра</div>
         </article>
 
         <article class="sol rv">
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></div>
           <h3>Единое окно и CRM</h3>
           <p>Все каналы переписки в одной ленте и воронке. Клиент из разных мессенджеров склеивается по телефону.</p>
           <ul>
@@ -745,12 +761,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>Звонки и записи разговоров прямо в карточке</li>
             <li>Переезд из Битрикс24 без потерь и дублей</li>
           </ul>
-          <div class="sol-res">Вы видите каждого клиента и каждого менеджера</div>
         </article>
 
-        <article class="sol hot rv">
-          <span class="badge">Поток заявок</span>
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M13 3L4 14h7l-1 7 9-11h-7z"/></svg></div>
+        <article class="sol rv">
           <h3>Бот откликов на биржах</h3>
           <p>Следит за новыми заказами на площадках 24/7 и откликается первым, пока конкуренты спят.</p>
           <ul>
@@ -759,11 +772,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>Ведёт переписку и догоняет тех, кто замолчал</li>
             <li>Расходует только бесплатные лимиты площадки</li>
           </ul>
-          <div class="sol-res">До 597 откликов в сутки на одном проекте</div>
         </article>
 
         <article class="sol rv">
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div>
           <h3>Перехват заявок в сообществах</h3>
           <p>Следит за профильными Telegram-чатами и находит тех, кто прямо сейчас ищет подрядчика.</p>
           <ul>
@@ -771,12 +782,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>Первое касание в личке через минуты, а не через сутки</li>
             <li>Дальше диалог ведёте вы или ИИ-менеджер</li>
           </ul>
-          <div class="sol-res">Каждое четвёртое сообщение в теме оказалось лидом</div>
         </article>
 
-        <article class="sol hot rv">
-          <span class="badge">Для товарки</span>
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/></svg></div>
+        <article class="sol rv">
           <h3>Автозагрузка товаров на Авито</h3>
           <p>Из 1С, Google-таблицы или API поставщика собираются тысячи объявлений. Без ручной работы.</p>
           <ul>
@@ -785,11 +793,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>Без дублей: проверка по артикулу и фото</li>
             <li>Проверка ошибок до публикации</li>
           </ul>
-          <div class="sol-res">Было 2 669 объявлений, стало около 12 600</div>
         </article>
 
         <article class="sol rv">
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></div>
           <h3>Телефония и обзвон</h3>
           <p>Номера по отделам, звонки прямо из браузера, обзвон базы с обязательным итогом каждого звонка.</p>
           <ul>
@@ -798,11 +804,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>Проверка компании по ИНН в один клик</li>
             <li>Входящий звонит только тем, кто в нужной зоне</li>
           </ul>
-          <div class="sol-res">Ни один звонок не теряется и не остаётся без итога</div>
         </article>
 
         <article class="sol rv">
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
           <h3>Дашборды для собственника</h3>
           <p>Цифры бизнеса на одном экране, а не в голове у менеджеров и не в десяти таблицах.</p>
           <ul>
@@ -810,11 +814,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>KPI, «кто застрял», светофор по сделкам</li>
             <li>P&amp;L по месяцам: выручка, расходы, рентабельность</li>
           </ul>
-          <div class="sol-res">Управляете бизнесом по цифрам, а не по ощущениям</div>
         </article>
 
         <article class="sol rv">
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></div>
           <h3>Документы и рутина</h3>
           <p>Всё, что сотрудники делают по шаблону, система делает за них.</p>
           <ul>
@@ -822,11 +824,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>Смета по фото чертежа: ИИ читает, код считает</li>
             <li>Счета, акты и напоминания должникам</li>
           </ul>
-          <div class="sol-res">Часы рутины превращаются в минуты</div>
         </article>
 
         <article class="sol rv">
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div>
           <h3>Telegram для сообществ и контента</h3>
           <p>Порядок в чатах и регулярный контент без ручной работы.</p>
           <ul>
@@ -834,7 +834,6 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>Десятки групп под контролем в одной панели</li>
             <li>SEO-статьи под нишу с учётом, какая статья привела клиента</li>
           </ul>
-          <div class="sol-res">Админам больше не нужно чистить чаты руками</div>
         </article>
 
       </div>
@@ -842,9 +841,8 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
     <!-- CASES -->
     <section id="kejsy">
-      <div class="kicker rv">Кейсы</div>
-      <h2 class="rv">Результаты в цифрах</h2>
-      <p class="sub rv">Названия компаний не раскрываю: конфиденциальность клиентов важнее красивой витрины. Цифры реальные.</p>
+      <h2 class="rv">Кейсы</h2>
+      <p class="sub rv">Названия компаний не раскрываю. Цифры реальные.</p>
 
       <div class="cases">
 
@@ -883,7 +881,7 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
           <div class="case-num">в 3 раза<small>чаще покупают после живого диалога</small></div>
           <div>
             <div class="case-niche">Аналитика 400+ диалогов</div>
-            <h3>Продаёт не цена, а глубина переписки</h3>
+            <h3>Чем дольше переписка, тем чаще покупка</h3>
             <p>Когда клиент написал одно сообщение, сделка случается в 16% случаев, когда семь и больше, то в 46%. Поэтому ИИ не бросает диалог и мягко ведёт его дальше.</p>
           </div>
         </div>
@@ -910,7 +908,7 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
           <div class="case-num">1 бан<small>действует сразу во всех чатах клуба</small></div>
           <div>
             <div class="case-niche">Бизнес-клуб</div>
-            <h3>Спам исчез, админы свободны</h3>
+            <h3>Один антиспам на все чаты клуба</h3>
             <p>Антиспам по баллам и базам спамеров: бан действует во всех чатах клуба сразу. Для школ клуба комплект из 8 презентаций собирается одной кнопкой.</p>
           </div>
         </div>
@@ -920,9 +918,8 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
     <!-- STEPS -->
     <section>
-      <div class="kicker rv">Как работаем</div>
-      <h2 class="rv">От разговора до работающей системы</h2>
-      <p class="sub rv">Вы не пишете ТЗ и не ищете программистов. От вас нужен один разговор и доступы.</p>
+      <h2 class="rv">Как работаем</h2>
+      <p class="sub rv">ТЗ писать не нужно. От вас нужен разговор и доступы.</p>
       <div class="steps">
         <div class="step rv"><h3>Разбор</h3><p>Созваниваемся и находим, где бизнес теряет деньги и время.</p></div>
         <div class="step rv"><h3>План и цена</h3><p>Фиксирую, что будет сделано, какой результат и сколько это стоит.</p></div>
@@ -934,10 +931,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
     <!-- WHY -->
     <section>
-      <div class="kicker rv">Почему со мной</div>
-      <h2 class="rv">Я не продаю технологию. Я продаю результат</h2>
+      <h2 class="rv">Почему мне можно доверить задачу</h2>
       <div class="why">
-        <div class="rv"><b>Проверено на себе</b><p>Моё агентство ведёт 36 клиентов на этих же системах. Вы получаете то, что уже работает.</p></div>
+        <div class="rv"><b>Проверено на себе</b><p>Моё агентство ведёт 36 клиентов на этих же системах.</p></div>
         <div class="rv"><b>Знаю продажи</b><p>7 лет в маркетинге: клиенты заработали с моей помощью более 65 млн рублей.</p></div>
         <div class="rv"><b>ИИ под контролем</b><p>Не выдумывает цены и не обещает лишнего. Деньги считает код, а не нейросеть.</p></div>
         <div class="rv"><b>Данные в безопасности</b><p>Персональные данные клиентов обрабатываются по 152-ФЗ, через российские модели.</p></div>
@@ -946,7 +942,6 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
     <!-- FAQ -->
     <section>
-      <div class="kicker rv">Вопросы</div>
       <h2 class="rv">Частые вопросы</h2>
       <div class="faq">
         <details class="rv"><summary>Сколько это стоит?</summary>
@@ -964,9 +959,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
     <!-- FINAL -->
     <div class="final rv" id="svyaz">
-      <span class="eyebrow"><span class="pulse"></span>Бесплатный разбор</span>
-      <h2>Расскажите, где у вас рутина. Покажу, что можно автоматизировать</h2>
-      <p class="sub">Один разговор, и вы будете знать, сколько денег и часов можно вернуть в бизнес. Ни к чему не обязывает.</p>
+      <span class="eyebrow">Бесплатный разбор</span>
+      <h2>Опишите задачу, и я скажу, что из неё можно автоматизировать</h2>
+      <p class="sub">Разбор бесплатный. После него вы будете знать, что можно автоматизировать и сколько это стоит.</p>
       <div class="btns">
         <a class="btn main" href="https://max.ru/u/f9LHodD0cOIXB-F1u0pDgw0YfGYCEzNh_cnDXEuHyGzvqk4zf6NTt8B4-fg" target="_blank" rel="noopener"
            data-msg="Здравствуйте! Хочу бесплатный разбор: что можно автоматизировать в моём бизнесе.">
@@ -1027,7 +1022,7 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
        data-msg="Здравствуйте! Хочу обсудить автоматизацию для моего бизнеса.">Обсудить мою задачу</a>
   </div>
 
-  <div class="toast" id="toast" role="status" aria-live="polite">Текст сообщения скопирован — вставьте его в чат</div>
+  <div class="toast" id="toast" role="status" aria-live="polite">Текст сообщения скопирован, вставьте его в чат</div>
 
   <script>
   /* Лента-пример на первом экране: события по кругу */

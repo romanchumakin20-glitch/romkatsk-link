@@ -642,11 +642,39 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
   .lead .res.ok{color:var(--accent-mint,#5ff0b7)} .lead .res.bad{color:#ff8a80}
   :root[data-theme="light"] .lead .res.ok{color:#0f7a4f} :root[data-theme="light"] .lead .res.bad{color:#c62828}
 </style>
+<!-- ANTI-SLOP -->
+<style>
+/* Без декоративных эффектов типового ИИ-лендинга: свечений, сетки, градиентного текста,
+   иконок в плашках, бейджей, проявления при прокрутке. Лежит последним, поэтому !important
+   нужен только против правил светлой темы с более высокой специфичностью. */
+:root,:root[data-theme="light"]{ --radius:10px; }
+.pulse,.pain-x{ display:none !important; }
+.grad,.stat-n,.case-num{ background:none !important; -webkit-background-clip:border-box !important;
+  background-clip:border-box !important; color:inherit !important; }
+.eyebrow,.case-niche{ font-family:'Manrope',system-ui,sans-serif !important; text-transform:none !important;
+  letter-spacing:0 !important; font-size:15px !important; font-weight:600; }
+.eyebrow{ padding:0 !important; border:0 !important; background:none !important; color:var(--text-muted) !important; }
+.case-niche{ color:var(--text-muted) !important; }
+.hero .lead{ max-width:560px; margin:0 0 32px; display:block; text-align:left; }
+.btn,.feed,.sol,.case,.step,.final,.why > div,.faq details{ box-shadow:none !important; }
+.feed,.sol,.case,.case.wide,.final{ background:var(--bg-panel) !important; }
+.sol:hover{ transform:none !important; }
+.sol li::before{ width:6px !important; height:6px !important; top:.62em !important; border-radius:0 !important;
+  background:var(--text-muted) !important; }
+.pain{ background:none !important; border:0 !important; border-top:1px solid var(--divider) !important;
+  border-radius:0 !important; padding:18px 0 !important; }
+.stats{ grid-template-columns:repeat(3,1fr) !important; }
+@media (max-width:640px){ .stats{ grid-template-columns:1fr !important; } }
+.feed,.feed::before,.case,details{ border-radius:var(--radius) !important; }
+.btn.main{ background:#2a7bf0 !important; }
+:root[data-theme="light"] .btn.main{ background:#1667c9 !important; }
+.btn.main:hover{ transform:none !important; filter:brightness(1.08); }
+.step::before{ font-family:'Manrope',system-ui,sans-serif !important; font-weight:700; padding:0 !important;
+  border:0 !important; background:none !important; border-radius:0 !important; color:var(--text-muted) !important; }
+.js .rv{ opacity:1 !important; transform:none !important; transition:none !important; }
+</style>
 </head>
 <body>
-  <div class="bg-grid"></div>
-  <div class="glow a"></div>
-  <div class="glow b"></div>
 
   <div class="wrap">
 
@@ -663,9 +691,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
     <!-- HERO -->
     <div class="hero">
       <div>
-        <span class="eyebrow"><span class="pulse"></span>业务自动化与 AI 智能体</span>
-        <h1>让生意<span class="grad">在您睡觉时照常运转</span></h1>
-        <p class="lead">我为企业部署 AI 客服经理、CRM、机器人和商品自动上架。它们几秒内回复客户，不漏掉任何一条询单，日常琐事自动完成，而您能用数字清楚看到成果。</p>
+        <span class="eyebrow">业务自动化与 AI 智能体</span>
+        <h1>自动化询单、聊天和日常琐事</h1>
+        <p class="lead">AI 客服经理在晚上和周末回复客户。CRM 把所有通讯软件里的聊天汇总到一个列表。自动上架把商品发布到 Avito。</p>
         <div class="btns">
           <a class="btn main" href="https://max.ru/u/f9LHodD0cOIXB-F1u0pDgw0YfGYCEzNh_cnDXEuHyGzvqk4zf6NTt8B4-fg" target="_blank" rel="noopener"
              data-msg="您好！我想聊聊我公司的业务自动化。">
@@ -683,7 +711,7 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
       <div class="feed" aria-label="示例：自动化系统一个晚上都做了什么">
         <div class="feed-head">
-          <div class="feed-title"><span class="pulse"></span>晚上 23:00 的您的生意</div>
+          <div class="feed-title">晚上 23:00 的您的生意</div>
           <div class="feed-note">示例</div>
         </div>
         <ul class="feed-list" id="feed"></ul>
@@ -695,38 +723,28 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
       <div class="stat"><div class="stat-n">26</div><div class="stat-l">个账户已由我的 AI 智能体托管</div></div>
       <div class="stat"><div class="stat-n">17,000+</div><div class="stat-l">条接单回复由机器人在接单平台上发出</div></div>
       <div class="stat"><div class="stat-n">4.7倍</div><div class="stat-l">客户启用自动上架后，商品信息数量增长</div></div>
-      <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">全年无休，不请假、不休病假</div></div>
     </div>
 
     <!-- PAINS -->
     <section>
-      <div class="kicker rv">似曾相识？</div>
-      <h2 class="rv">生意每天都在细节上流失金钱</h2>
-      <p class="sub rv">这些损失在报表里看不到，但凡是通过聊天、电话和平台做销售的人，都在为它买单。</p>
+      <h2 class="rv">询单通常在哪里流失</h2>
+      <p class="sub rv">客户找我时最常遇到的就是这些问题。</p>
       <div class="pains">
-        <div class="pain rv"><span class="pain-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-          <p><b>客户晚上发来消息，第二天早上才回复</b>一夜之间，他已经从最先回复的人那里买好了。</p></div>
-        <div class="pain rv"><span class="pain-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-          <p><b>询单分散在五个渠道里</b>Avito（俄罗斯最大的分类信息平台）、Telegram、WhatsApp、MAX、官网。总有一部分会丢失，却没人知道丢的是哪些。</p></div>
-        <div class="pain rv"><span class="pain-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-          <p><b>销售经理想怎么干就怎么干</b>有人没回电话，有人把客户忘了。在钱流失之前，您根本无从核查。</p></div>
-        <div class="pain rv"><span class="pain-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-          <p><b>琐事吞噬大量时间</b>商品、价格、报表和文件都靠手工搬运。员工拿着工资，干的却是机器人的活。</p></div>
+        <div class="pain rv"><p><b>客户晚上发来消息，第二天早上才回复</b>一夜之间，他已经从最先回复的人那里买好了。</p></div>
+        <div class="pain rv"><p><b>询单分散在五个渠道里</b>Avito（俄罗斯最大的分类信息平台）、Telegram、WhatsApp、MAX、官网。总有一部分会丢失，却没人知道丢的是哪些。</p></div>
+        <div class="pain rv"><p><b>销售经理想怎么干就怎么干</b>有人没回电话，有人把客户忘了。您根本无从核查。</p></div>
+        <div class="pain rv"><p><b>琐事吞噬大量时间</b>商品、价格、报表和文件都靠手工搬运。</p></div>
       </div>
-      <div class="turn rv"><b>这些问题都可以靠自动化解决。</b>不是“为了 AI 而上 AI”，而是用具体的系统，堵住具体的资金漏洞。</div>
     </section>
 
     <!-- SOLUTIONS -->
     <section id="resheniya">
-      <div class="kicker rv">解决方案</div>
       <h2 class="rv">我能自动化哪些工作</h2>
-      <p class="sub rv">每一套方案都已在真实业务中运行。我会按您的需求来搭建：可以是单个方案，也可以是多个方案的组合。</p>
+      <p class="sub rv">这些方案都已在客户那里运行。可以选一个，也可以组合几个。</p>
 
       <div class="sol-grid">
 
-        <article class="sol hot rv">
-          <span class="badge">热门</span>
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/><path d="M9 10h.01M12 10h.01M15 10h.01" stroke-width="2.6"/></svg></div>
+        <article class="sol rv">
           <h3>聊天 AI 客服经理</h3>
           <p>在 Avito、Telegram、MAX、WhatsApp 和官网上回复客户。全天候在线，几秒内响应。</p>
           <ul>
@@ -735,11 +753,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>必要时把对话转交给真人</li>
             <li>每条询单都会通过 Telegram 通知您</li>
           </ul>
-          <div class="sol-res">没有一位客户需要等到天亮</div>
         </article>
 
         <article class="sol rv">
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></div>
           <h3>统一收件箱与 CRM</h3>
           <p>所有聊天渠道汇入同一个消息流和销售漏斗。同一客户在不同通讯软件里的记录，按手机号自动合并。</p>
           <ul>
@@ -748,12 +764,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>通话及录音直接显示在客户卡片中</li>
             <li>从 Bitrix24 迁移，不丢数据、不产生重复</li>
           </ul>
-          <div class="sol-res">每位客户、每位销售经理都一目了然</div>
         </article>
 
-        <article class="sol hot rv">
-          <span class="badge">询单源源不断</span>
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M13 3L4 14h7l-1 7 9-11h-7z"/></svg></div>
+        <article class="sol rv">
           <h3>接单平台自动回复机器人</h3>
           <p>24/7 盯着各平台上的新订单，趁竞争对手还在睡觉，抢先第一个回复。</p>
           <ul>
@@ -762,11 +775,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>持续跟进对话，主动唤回不再回复的客户</li>
             <li>只使用平台的免费额度</li>
           </ul>
-          <div class="sol-res">单个项目每天最多 597 条回复</div>
         </article>
 
         <article class="sol rv">
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div>
           <h3>社群询单捕获</h3>
           <p>监控行业相关的 Telegram 群聊，找出此刻正在寻找服务商的人。</p>
           <ul>
@@ -774,12 +785,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>几分钟内私信首次联系，而不是等上一整天</li>
             <li>后续对话由您或 AI 客服经理接手</li>
           </ul>
-          <div class="sol-res">相关话题中每四条消息就有一条是潜在客户</div>
         </article>
 
-        <article class="sol hot rv">
-          <span class="badge">适合商品零售</span>
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/></svg></div>
+        <article class="sol rv">
           <h3>Avito 商品自动上架</h3>
           <p>从 1C、Google 表格或供应商 API 自动生成成千上万条商品信息，无需手工操作。</p>
           <ul>
@@ -788,11 +796,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>按货号和图片查重，杜绝重复</li>
             <li>发布前自动检查错误</li>
           </ul>
-          <div class="sol-res">商品信息从 2,669 条增加到约 12,600 条</div>
         </article>
 
         <article class="sol rv">
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></div>
           <h3>电话系统与外呼</h3>
           <p>按部门分配号码，直接在浏览器中拨打电话，批量外呼客户名单，每通电话都必须记录结果。</p>
           <ul>
@@ -801,11 +807,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>一键按税号核查企业信息</li>
             <li>来电只转给负责对应区域的人员</li>
           </ul>
-          <div class="sol-res">不漏接任何电话，每通电话都有结果</div>
         </article>
 
         <article class="sol rv">
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
           <h3>老板专属数据看板</h3>
           <p>业务数据集中在一个屏幕上，而不是装在销售经理的脑子里，也不是散落在十张表格里。</p>
           <ul>
@@ -813,11 +817,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>KPI、“谁卡住了”、交易红绿灯</li>
             <li>按月 P&amp;L：收入、支出、利润率</li>
           </ul>
-          <div class="sol-res">用数据管理生意，而不是凭感觉</div>
         </article>
 
         <article class="sol rv">
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></div>
           <h3>文件与日常琐事</h3>
           <p>员工按模板重复做的工作，都交给系统来完成。</p>
           <ul>
@@ -825,11 +827,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>拍下图纸即可出报价：AI 识图，程序计算</li>
             <li>发票、验收单及欠款催缴提醒</li>
           </ul>
-          <div class="sol-res">几小时的琐事缩短到几分钟</div>
         </article>
 
         <article class="sol rv">
-          <div class="sol-ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div>
           <h3>Telegram 社群与内容运营</h3>
           <p>群聊秩序井然，内容定期更新，无需手工操作。</p>
           <ul>
@@ -837,7 +837,6 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
             <li>在一个面板中管理数十个群组</li>
             <li>针对细分行业撰写 SEO 文章，并追踪每位客户来自哪篇文章</li>
           </ul>
-          <div class="sol-res">管理员再也不用手动清理群聊</div>
         </article>
 
       </div>
@@ -845,9 +844,8 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
     <!-- CASES -->
     <section id="kejsy">
-      <div class="kicker rv">案例</div>
-      <h2 class="rv">用数字说话的成果</h2>
-      <p class="sub rv">公司名称不予公开：客户的隐私比漂亮的展示更重要。数字均为真实数据。</p>
+      <h2 class="rv">案例</h2>
+      <p class="sub rv">公司名称不予公开。数字均为真实数据。</p>
 
       <div class="cases">
 
@@ -886,7 +884,7 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
           <div class="case-num">3倍<small>有来有回的对话后，成交率高出</small></div>
           <div>
             <div class="case-niche">400+ 段对话分析</div>
-            <h3>促成成交的不是价格，而是对话深度</h3>
+            <h3>聊得越久，成交越多</h3>
             <p>客户只发一条消息时，成交率为 16%；发到七条及以上时，成交率达到 46%。所以 AI 不会中途放弃对话，而是温和地持续推进。</p>
           </div>
         </div>
@@ -913,7 +911,7 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
           <div class="case-num">1次封禁<small>在俱乐部所有群聊中同时生效</small></div>
           <div>
             <div class="case-niche">商业俱乐部</div>
-            <h3>垃圾信息消失，管理员解放双手</h3>
+            <h3>一套反垃圾覆盖俱乐部所有群聊</h3>
             <p>基于评分和垃圾账号库的反垃圾机制：一次封禁，在俱乐部所有群聊中同时生效。俱乐部旗下学校所需的 8 份演示文稿，一键即可生成。</p>
           </div>
         </div>
@@ -923,8 +921,7 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
     <!-- STEPS -->
     <section>
-      <div class="kicker rv">合作流程</div>
-      <h2 class="rv">从一次沟通到系统上线运行</h2>
+      <h2 class="rv">合作流程</h2>
       <p class="sub rv">您不用写需求文档，也不用找程序员。只需要一次沟通，再提供相关权限。</p>
       <div class="steps">
         <div class="step rv"><h3>诊断</h3><p>通个电话，找出生意在哪些环节流失金钱和时间。</p></div>
@@ -937,10 +934,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
     <!-- WHY -->
     <section>
-      <div class="kicker rv">为什么选我</div>
-      <h2 class="rv">我卖的不是技术，而是结果</h2>
+      <h2 class="rv">为什么可以把任务交给我</h2>
       <div class="why">
-        <div class="rv"><b>亲身验证</b><p>我的代理公司正用这些系统服务 36 位客户。您得到的是已经跑通的方案。</p></div>
+        <div class="rv"><b>亲身验证</b><p>我的代理公司正用这些系统服务 36 位客户。</p></div>
         <div class="rv"><b>懂销售</b><p>7 年营销经验：在我的帮助下，客户累计收入超过6500万卢布。</p></div>
         <div class="rv"><b>AI 可控</b><p>不乱报价格，不乱许承诺。涉及金额的计算由程序完成，而不是交给神经网络。</p></div>
         <div class="rv"><b>数据安全</b><p>客户个人数据依照俄罗斯联邦第152号法律《个人数据法》，通过俄罗斯本土模型处理。</p></div>
@@ -949,7 +945,6 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
     <!-- FAQ -->
     <section>
-      <div class="kicker rv">问答</div>
       <h2 class="rv">常见问题</h2>
       <div class="faq">
         <details class="rv"><summary>费用是多少？</summary>
@@ -967,9 +962,9 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
 
     <!-- FINAL -->
     <div class="final rv" id="svyaz">
-      <span class="eyebrow"><span class="pulse"></span>免费诊断</span>
-      <h2>告诉我您被哪些琐事缠身，我来告诉您哪些可以自动化</h2>
-      <p class="sub">只需一次沟通，您就会知道能为生意找回多少钱和时间。不附带任何义务。</p>
+      <span class="eyebrow">免费诊断</span>
+      <h2>描述您的任务，我告诉您哪些可以自动化</h2>
+      <p class="sub">诊断免费。之后您会知道哪些可以自动化，以及费用是多少。</p>
       <div class="btns">
         <a class="btn main" href="https://max.ru/u/f9LHodD0cOIXB-F1u0pDgw0YfGYCEzNh_cnDXEuHyGzvqk4zf6NTt8B4-fg" target="_blank" rel="noopener"
            data-msg="您好！我想预约一次免费诊断：看看我的生意里哪些工作可以自动化。">
