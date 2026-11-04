@@ -640,6 +640,28 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
   .hero .lead{max-width:560px;margin:0 0 32px;display:block;text-align:left}
   :root[data-theme="light"] .lead .res.ok{color:#0f7a4f} :root[data-theme="light"] .lead .res.bad{color:#c62828}
 </style>
+<!-- POLISH -->
+<style>
+/* Шлифовка по аудиту ui-ux-pro-max: подписи не мельче 12px, активный язык контрастнее,
+   на телефоне переключатели и ссылка «назад» удобны пальцу. Внешний вид не меняется. */
+.feed-note,.badge,.ba span{ font-size:12.5px; }
+:root[data-theme="light"] .lang a[aria-current]{ color:#0b5fae; }
+@media (max-width:640px){
+  .lang a{ min-height:40px; padding:0 7px; white-space:nowrap; }
+  .theme-btn{ width:36px; height:40px; }
+  .back{ min-height:44px; white-space:nowrap; }
+  .cons input{ width:22px !important; height:22px !important; }
+}
+@media (max-width:400px){
+  .tools{ gap:4px; }
+  .lang a{ min-width:28px; padding:0 5px; font-size:12px; }
+  .theme-btn{ width:32px; }
+  .back{ gap:4px; font-size:13px; }
+  .top{ gap:6px; }
+}
+@media (max-width:400px){ .eyebrow{ letter-spacing:.06em; font-size:11.5px; } }
+@media (max-width:340px){ .back{ font-size:12px; } .lang a{ padding:0 4px; } }
+</style>
 </head>
 <body>
   <div class="bg-grid"></div>
@@ -661,7 +683,7 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
     <!-- HERO -->
     <div class="hero">
       <div>
-        <span class="eyebrow"><span class="pulse"></span>Автоматизация бизнеса и ИИ-агенты</span>
+        <span class="eyebrow"><span class="pulse"></span>Автоматизация бизнеса и <span style="white-space:nowrap">ИИ-агенты</span></span>
         <h1>Бизнес, который <span class="grad">работает, пока вы&nbsp;спите</span></h1>
         <p class="lead">Внедряю ИИ-менеджеров, CRM, ботов и автозагрузки. Они отвечают клиентам за секунды, не теряют ни одной заявки и сами делают рутину, а вы видите результат в цифрах.</p>
         <div class="btns">
