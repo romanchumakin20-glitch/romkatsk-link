@@ -18,7 +18,7 @@
     var bs=document.querySelectorAll('.theme-btn');
     for(var i=0;i<bs.length;i++)bs[i].setAttribute('aria-pressed',bs[i].getAttribute('data-set')===t?'true':'false');
   }
-  window.__rkTheme={group:p?'manual':g};
+  window.__rkTheme={group:g,manual:p||'none'};  // анализ по назначению: ручной выбор не выбивает из группы
   apply();
   document.addEventListener('DOMContentLoaded',apply);
   if(mq&&mq.addEventListener)mq.addEventListener('change',function(){if(p==='system')apply()});
@@ -404,7 +404,7 @@ m[i].l=1*new Date();
 for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
 k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
 })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113221102', 'ym');
-ym(113221102, 'init', {params:{ab_theme:(window.__rkTheme||{}).group||'unknown'}, ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+ym(113221102, 'init', {params:{ab_theme:(window.__rkTheme||{}).group||'unknown',theme_manual:(window.__rkTheme||{}).manual||'none'}, ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/113221102" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
