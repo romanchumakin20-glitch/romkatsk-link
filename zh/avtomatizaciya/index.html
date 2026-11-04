@@ -2,6 +2,34 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+<!-- THEME-AB -->
+<script>
+(function(){
+  var d=document.documentElement,p=null,g=null,ORDER=['light','dark','system'];
+  try{p=localStorage.getItem('rk-theme')}catch(e){}
+  try{g=localStorage.getItem('rk-ab')}catch(e){}
+  if(ORDER.indexOf(p)<0)p=null;
+  if(g!=='light'&&g!=='dark'){g=Math.random()<.5?'light':'dark';try{localStorage.setItem('rk-ab',g)}catch(e){}}
+  var mq=window.matchMedia?matchMedia('(prefers-color-scheme: light)'):null;
+  function resolved(){return p==='light'||p==='dark'?p:p==='system'?(mq&&mq.matches?'light':'dark'):g}
+  function apply(){
+    var t=resolved();d.setAttribute('data-theme',t);
+    var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='light'?'#f4f6fa':'#060911');
+    var bs=document.querySelectorAll('.theme-btn');
+    for(var i=0;i<bs.length;i++)bs[i].setAttribute('aria-pressed',bs[i].getAttribute('data-set')===t?'true':'false');
+  }
+  window.__rkTheme={group:p?'manual':g};
+  apply();
+  document.addEventListener('DOMContentLoaded',apply);
+  if(mq&&mq.addEventListener)mq.addEventListener('change',function(){if(p==='system')apply()});
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.theme-btn');if(!b)return;
+    p=b.getAttribute('data-set');
+    try{localStorage.setItem('rk-theme',p)}catch(e){}
+    apply();try{ym(113221102,'params',{theme_switch:p})}catch(e){}
+  });
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>业务自动化与 AI 智能体｜罗曼·丘马金 Roman Chumakin</title>
 <meta name="description" content="聊天 AI 客服经理、全渠道统一收件箱与 CRM、自动接单机器人、Avito（俄罗斯最大的分类信息平台）商品自动上架、带通话转写的电话系统、老板专属数据看板。一站式交付的业务自动化，用数字说话。">
@@ -377,7 +405,7 @@ m[i].l=1*new Date();
 for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
 k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
 })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113221102', 'ym');
-ym(113221102, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+ym(113221102, 'init', {params:{ab_theme:(window.__rkTheme||{}).group||'unknown'}, ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/113221102" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
@@ -425,6 +453,195 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
   .lang-float{position:absolute;top:14px;right:14px;z-index:5}
   .top .lang{margin-left:auto}
 </style>
+<style>
+  .tools{display:inline-flex;align-items:center;gap:6px}
+  .top .tools{margin-left:auto}
+  .theme{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--divider);border-radius:999px;
+    background:rgba(16,22,42,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  .theme-btn{width:32px;height:30px;padding:0;border:0;border-radius:999px;background:transparent;cursor:pointer;
+    font-size:16px;line-height:1;display:inline-flex;align-items:center;justify-content:center;opacity:.55;transition:opacity .2s,background .2s}
+  .theme-btn:hover{opacity:.9}
+  .theme-btn[aria-pressed="true"]{opacity:1;background:rgba(63,169,245,.18)}
+  .theme-btn:focus-visible{outline:2px solid var(--accent-blue);outline-offset:1px}
+  :root[data-theme="light"] .theme{background:rgba(255,255,255,.85)}
+
+/* Светлая тема лендинга автоматизации. Всё под :root[data-theme="light"], тёмная по умолчанию не меняется. */
+:root[data-theme="light"]{
+  color-scheme:light;
+  --bg-deep:#f4f6fa;
+  --bg-panel:#ffffff;
+  --bg-panel-hover:#fbfdff;
+  --accent-blue:#0f6fc6;
+  --accent-cyan:#0a73a0;
+  --accent-mint:#0a7a52;
+  --text-primary:#0e1730;
+  --text-muted:#56627c;
+  --divider:rgba(14,23,48,0.10);
+  --l-text-2:#3a4661;
+  --l-shadow:0 1px 2px rgba(14,23,48,0.04), 0 6px 20px rgba(14,23,48,0.05);
+}
+:root[data-theme="light"] ::selection{ background:rgba(15,111,198,0.18); color:var(--text-primary); }
+:root[data-theme="light"] b{ color:#08112a; }
+
+/* фон: сетка и свечения */
+:root[data-theme="light"] .bg-grid{
+  background-image:
+    linear-gradient(rgba(14,23,48,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14,23,48,0.05) 1px, transparent 1px);
+}
+:root[data-theme="light"] .glow.a{ background:radial-gradient(closest-side, rgba(63,169,245,0.18), transparent 70%); }
+:root[data-theme="light"] .glow.b{ background:radial-gradient(closest-side, rgba(40,200,140,0.10), transparent 70%); }
+
+/* верхняя панель */
+:root[data-theme="light"] .top-cta{
+  border-color:rgba(15,111,198,0.35); background:rgba(255,255,255,0.7); color:var(--accent-blue);
+}
+:root[data-theme="light"] .top-cta:hover{ background:rgba(15,111,198,0.10); border-color:var(--accent-blue); }
+
+/* первый экран */
+:root[data-theme="light"] .eyebrow{
+  border-color:rgba(10,115,160,0.25); background:rgba(255,255,255,0.75);
+}
+:root[data-theme="light"] .pulse{ background:#12a874; }
+:root[data-theme="light"] .grad{
+  background:linear-gradient(100deg, #0e1730 0%, #0a73a0 50%, #0f6fc6 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+:root[data-theme="light"] .lead{ color:var(--l-text-2); }
+
+/* кнопки: основная остаётся синей с белым текстом, но темнее для контраста */
+:root[data-theme="light"] .btn.main{
+  background:linear-gradient(135deg, #1673d2, #1a5bcc);
+  color:#fff;
+  box-shadow:0 10px 28px rgba(22,115,210,0.28), inset 0 1px 0 rgba(255,255,255,.22);
+}
+:root[data-theme="light"] .btn.main:hover{
+  box-shadow:0 16px 38px rgba(22,115,210,0.36), inset 0 1px 0 rgba(255,255,255,.22);
+}
+:root[data-theme="light"] .btn.ghost{
+  border-color:rgba(14,23,48,0.14); background:#ffffff; color:var(--text-primary);
+  box-shadow:0 1px 2px rgba(14,23,48,0.05);
+}
+:root[data-theme="light"] .btn.ghost:hover{ background:#eef3fa; }
+:root[data-theme="light"] .btn:focus-visible,
+:root[data-theme="light"] a:focus-visible,
+:root[data-theme="light"] summary:focus-visible{ outline:2px solid var(--accent-blue); outline-offset:2px; }
+
+/* лента событий */
+:root[data-theme="light"] .feed{
+  background:linear-gradient(180deg, #ffffff, #f9fbfe);
+  border-color:rgba(10,115,160,0.16);
+  box-shadow:0 24px 60px rgba(14,23,48,0.10), 0 2px 6px rgba(14,23,48,0.04);
+}
+:root[data-theme="light"] .feed::before{
+  background:linear-gradient(140deg, rgba(63,169,245,.55), transparent 35%, transparent 65%, rgba(18,168,116,.40));
+}
+:root[data-theme="light"] .ev{ background:#f5f7fb; border-color:rgba(14,23,48,0.06); }
+:root[data-theme="light"] .ev-ic{ background:rgba(15,111,198,0.10); }
+:root[data-theme="light"] .ev.ok .ev-ic{ background:rgba(10,122,82,0.10); }
+
+/* цифры */
+:root[data-theme="light"] .stats{ box-shadow:var(--l-shadow); }
+:root[data-theme="light"] .stat{ background:#ffffff; }
+:root[data-theme="light"] .stat-n{
+  background:linear-gradient(180deg, #0e1730, #0f6fc6);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+
+/* боли */
+:root[data-theme="light"] .pain{ background:#fff8f9; border-color:rgba(200,50,75,0.16); }
+:root[data-theme="light"] .pain-x{ background:rgba(200,50,75,0.10); color:#c0304a; }
+:root[data-theme="light"] .pain p{ color:var(--l-text-2); }
+:root[data-theme="light"] .turn{
+  background:linear-gradient(100deg, rgba(18,168,116,0.10), rgba(63,169,245,0.09));
+  border-color:rgba(10,122,82,0.25);
+}
+
+/* решения */
+:root[data-theme="light"] .sol{ background:#ffffff; box-shadow:var(--l-shadow); }
+:root[data-theme="light"] .sol:hover{ border-color:rgba(15,111,198,0.40); background:var(--bg-panel-hover); }
+:root[data-theme="light"] .sol.hot{
+  border-color:rgba(15,111,198,0.30);
+  background:linear-gradient(180deg, #e8f2fd, #ffffff 60%);
+}
+:root[data-theme="light"] .badge{ background:rgba(10,122,82,0.10); color:#086b47; }
+:root[data-theme="light"] .sol-ic{
+  background:linear-gradient(135deg, rgba(63,169,245,0.16), rgba(127,227,255,0.12));
+  border-color:rgba(10,115,160,0.20); color:var(--accent-blue);
+}
+:root[data-theme="light"] .sol li{ color:var(--l-text-2); }
+:root[data-theme="light"] .sol li::before{
+  background:rgba(10,122,82,0.12) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230a7a52' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/9px no-repeat;
+}
+
+/* кейсы */
+:root[data-theme="light"] .case{ background:#ffffff; box-shadow:var(--l-shadow); }
+:root[data-theme="light"] .case.wide{
+  background:linear-gradient(120deg, #e4f0fd, #ffffff 55%);
+  border-color:rgba(15,111,198,0.25);
+}
+:root[data-theme="light"] .case-num{
+  background:linear-gradient(180deg, #0e1730, #0f6fc6);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+:root[data-theme="light"] .case p{ color:var(--l-text-2); }
+:root[data-theme="light"] .ba .was{ background:#fff5f6; border-color:rgba(200,50,75,0.18); color:#7d2535; }
+:root[data-theme="light"] .ba .now{ background:#effaf5; border-color:rgba(10,122,82,0.22); color:#0b5a3d; }
+
+/* шаги, почему, вопросы */
+:root[data-theme="light"] .step{ background:#ffffff; box-shadow:var(--l-shadow); }
+:root[data-theme="light"] .step::before{ border-color:rgba(15,111,198,0.30); background:rgba(15,111,198,0.05); }
+:root[data-theme="light"] .why div{ background:rgba(255,255,255,0.75); }
+:root[data-theme="light"] details{ background:#ffffff; box-shadow:0 1px 2px rgba(14,23,48,0.04); }
+:root[data-theme="light"] details[open]{ border-color:rgba(15,111,198,0.40); }
+:root[data-theme="light"] details p{ color:var(--l-text-2); }
+
+/* финальный призыв */
+:root[data-theme="light"] .final{
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(63,169,245,0.18), transparent 60%),
+    linear-gradient(180deg, #eaf3fd, #ffffff);
+  border-color:rgba(15,111,198,0.22);
+  box-shadow:0 20px 60px rgba(14,23,48,0.08);
+}
+:root[data-theme="light"] .msgs a{ background:rgba(255,255,255,0.8); border-color:rgba(14,23,48,0.12); }
+:root[data-theme="light"] .msgs a:hover{ color:var(--text-primary); border-color:rgba(14,23,48,0.30); }
+
+/* подсказка после копирования */
+:root[data-theme="light"] .toast{
+  background:#ffffff; color:var(--text-primary);
+  border-color:rgba(15,111,198,0.35);
+  box-shadow:0 14px 40px rgba(14,23,48,0.16);
+}
+
+/* переключатель языка */
+:root[data-theme="light"] .lang{
+  background:rgba(255,255,255,0.82);
+  border-color:rgba(14,23,48,0.10);
+  box-shadow:0 2px 10px rgba(14,23,48,0.06);
+}
+:root[data-theme="light"] .lang a{ color:var(--text-muted); }
+:root[data-theme="light"] .lang a:hover{ color:var(--text-primary); }
+:root[data-theme="light"] .lang a[aria-current]{ color:var(--accent-blue); background:rgba(15,111,198,0.10); }
+
+</style>
+<style>
+  .lead{max-width:460px;margin:28px auto 0;text-align:left;display:grid;gap:10px}
+  .lead .or{text-align:center;color:var(--text-muted);font-size:14px;margin:0 0 4px}
+  .lead input[type=text],.lead input[type=tel],.lead textarea{width:100%;box-sizing:border-box;font:inherit;font-size:16px;
+    color:var(--text-primary);background:var(--bg-panel);border:1px solid var(--divider);border-radius:14px;padding:13px 14px;min-height:48px}
+  .lead textarea{min-height:84px;resize:vertical}
+  .lead input:focus-visible,.lead textarea:focus-visible{outline:2px solid var(--accent-blue);outline-offset:1px}
+  .lead ::placeholder{color:var(--text-muted);opacity:1}
+  .lead .cons{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text-muted);line-height:1.4}
+  .lead .cons input{width:18px;height:18px;margin:1px 0 0;flex:none;accent-color:var(--accent-blue)}
+  .lead .btn{width:100%;justify-content:center;border:0;cursor:pointer;font:inherit;font-weight:600}
+  .lead .btn[disabled]{opacity:.6;cursor:default}
+  .lead .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .lead .res{min-height:1.2em;font-size:14px;text-align:center;margin:0}
+  .lead .res.ok{color:var(--accent-mint,#5ff0b7)} .lead .res.bad{color:#ff8a80}
+  :root[data-theme="light"] .lead .res.ok{color:#0f7a4f} :root[data-theme="light"] .lead .res.bad{color:#c62828}
+</style>
 </head>
 <body>
   <div class="bg-grid"></div>
@@ -438,7 +655,7 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
         罗曼·丘马金
       </a>
-      <nav class="lang" aria-label="Language / Язык / 语言"><a href="/avtomatizaciya/" hreflang="ru" lang="ru" data-setlang="ru" title="Русский">RU</a><a href="/en/avtomatizaciya/" hreflang="en" lang="en" data-setlang="en" title="English">EN</a><a href="/zh/avtomatizaciya/" hreflang="zh" lang="zh" data-setlang="zh" title="中文" aria-current="page">中文</a></nav>
+      <div class="tools"><nav class="lang" aria-label="Language / Язык / 语言"><a href="/avtomatizaciya/" hreflang="ru" lang="ru" data-setlang="ru" title="Русский">RU</a><a href="/en/avtomatizaciya/" hreflang="en" lang="en" data-setlang="en" title="English">EN</a><a href="/zh/avtomatizaciya/" hreflang="zh" lang="zh" data-setlang="zh" title="中文" aria-current="page">中文</a></nav><div class="theme" role="group" aria-label="主题"><button type="button" class="theme-btn" data-set="light" aria-pressed="false" aria-label="主题: 浅色" title="主题: 浅色">☀️</button><button type="button" class="theme-btn" data-set="dark" aria-pressed="false" aria-label="主题: 深色" title="主题: 深色">🌙</button></div></div>
       <a class="top-cta" href="https://max.ru/u/f9LHodD0cOIXB-F1u0pDgw0YfGYCEzNh_cnDXEuHyGzvqk4zf6NTt8B4-fg" target="_blank" rel="noopener"
          data-msg="您好！我想聊聊我公司的业务自动化。">聊聊需求</a>
     </header>
@@ -764,6 +981,45 @@ if(/t\.me|telegram/.test(h))g('click_telegram');else if(/max\.ru/.test(h))g('cli
         <a href="https://t.me/romkatsk" target="_blank" rel="noopener">Telegram</a>
         <a href="https://wa.me/79521539258" target="_blank" rel="noopener">WhatsApp</a>
       </div>
+      <!-- LEAD-FORM -->
+      <form class="lead" id="lead" novalidate>
+        <p class="or">或留下需求，我会给您回电或发消息</p>
+        <input type="text" name="name" autocomplete="name" placeholder="您的称呼" aria-label="您的称呼" maxlength="80">
+        <input type="tel" name="contact" autocomplete="tel" placeholder="电话或 Telegram" aria-label="电话或 Telegram" maxlength="80" required>
+        <textarea name="task" placeholder="您想自动化什么（选填）" aria-label="您想自动化什么（选填）" maxlength="1500"></textarea>
+        <div class="hp" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
+        <label class="cons"><input type="checkbox" name="consent" required><span>我同意为答复本需求而处理我的个人数据</span></label>
+        <button class="btn main" type="submit">提交需求</button>
+        <p class="res" role="status" aria-live="polite"></p>
+      </form>
+      <script>
+      (function(){
+        var f=document.getElementById('lead');if(!f)return;
+        var M={sending:"正在提交…",ok:"已收到，我会在一天内与您联系。",err:"提交失败。请通过上方按钮在 MAX 或 Telegram 联系我。",bad:"请填写电话或 Telegram 用户名",ctag:"联系方式",send:"提交需求"};
+        var res=f.querySelector('.res'),btn=f.querySelector('button');
+        function say(c,m){res.className='res '+c;res.textContent=m}
+        f.addEventListener('submit',function(e){
+          e.preventDefault();
+          if(f.website.value)return;                       // бот заполнил ловушку - молча игнорируем
+          var c=f.contact.value.trim(),digits=c.replace(/\D/g,'');
+          if(!(digits.length>=10||/^@?[A-Za-z0-9_]{4,}$/.test(c))){say('bad',M.bad);f.contact.focus();return}
+          if(!f.consent.checked){say('bad',"请勾选同意处理个人数据");return}
+          var src='romkatsk.ru'+location.pathname+(document.documentElement.lang!=='ru'?' ('+document.documentElement.lang+')':'');
+          var g=(window.__rkTheme||{}).group;if(g)src+=' · тема '+g;
+          var b=new URLSearchParams();
+          b.set('name',f.name.value.trim()||'—');
+          if(digits.length>=10)b.set('phone',c);
+          b.set('message',(digits.length>=10?'':M.ctag+': '+c+'\n')+(f.task.value.trim()||''));
+          b.set('source',src);
+          b.set('tranid','rk-'+Date.now()+'-'+Math.random().toString(36).slice(2,8));
+          btn.disabled=true;btn.textContent=M.sending;say('', '');
+          fetch("https://proavihub.ru/api/tilda/cms70qran00035eaqjqtf64ga/webhook",{method:'POST',mode:'no-cors',body:b}).then(function(){
+            say('ok',M.ok);f.reset();
+            try{ym(113221102,'reachGoal','form_submit')}catch(x){}
+          }).catch(function(){say('bad',M.err)}).then(function(){btn.disabled=false;btn.textContent=M.send});
+        });
+      })();
+      </script>
     </div>
 
     <footer>罗曼·丘马金 · <a href="/zh/">romkatsk.ru</a></footer>

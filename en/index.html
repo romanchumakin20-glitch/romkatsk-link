@@ -2,6 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<!-- THEME-AB -->
+<script>
+(function(){
+  var d=document.documentElement,p=null,g=null,ORDER=['light','dark','system'];
+  try{p=localStorage.getItem('rk-theme')}catch(e){}
+  try{g=localStorage.getItem('rk-ab')}catch(e){}
+  if(ORDER.indexOf(p)<0)p=null;
+  if(g!=='light'&&g!=='dark'){g=Math.random()<.5?'light':'dark';try{localStorage.setItem('rk-ab',g)}catch(e){}}
+  var mq=window.matchMedia?matchMedia('(prefers-color-scheme: light)'):null;
+  function resolved(){return p==='light'||p==='dark'?p:p==='system'?(mq&&mq.matches?'light':'dark'):g}
+  function apply(){
+    var t=resolved();d.setAttribute('data-theme',t);
+    var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='light'?'#f4f6fa':'#060911');
+    var bs=document.querySelectorAll('.theme-btn');
+    for(var i=0;i<bs.length;i++)bs[i].setAttribute('aria-pressed',bs[i].getAttribute('data-set')===t?'true':'false');
+  }
+  window.__rkTheme={group:p?'manual':g};
+  apply();
+  document.addEventListener('DOMContentLoaded',apply);
+  if(mq&&mq.addEventListener)mq.addEventListener('change',function(){if(p==='system')apply()});
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.theme-btn');if(!b)return;
+    p=b.getAttribute('data-set');
+    try{localStorage.setItem('rk-theme',p)}catch(e){}
+    apply();try{ym(113221102,'params',{theme_switch:p})}catch(e){}
+  });
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Roman Chumakin — Avito Specialist &amp; Marketer: Avito, Cian, AI Agents</title>
 <meta name="description" content="Roman Chumakin — Avito specialist and marketer: promotion on Avito, Russia’s largest classifieds marketplace, Avito and Cian campaigns for property developers, AI chat agents, Yandex Direct ads and business automation. 7 years in marketing. Case studies and contact via MAX, Telegram, WhatsApp.">
@@ -376,7 +404,7 @@ m[i].l=1*new Date();
 for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
 k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
 })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113221102', 'ym');
-ym(113221102, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+ym(113221102, 'init', {params:{ab_theme:(window.__rkTheme||{}).group||'unknown'}, ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/113221102" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
@@ -424,9 +452,100 @@ document.addEventListener('submit',function(){g('form_submit')},true);})();
   .lang-float{position:absolute;top:14px;right:14px;z-index:5}
   .top .lang{margin-left:auto}
 </style>
+<style>
+  .tools{display:inline-flex;align-items:center;gap:6px}
+  .top .tools{margin-left:auto}
+  .theme{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--divider);border-radius:999px;
+    background:rgba(16,22,42,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  .theme-btn{width:32px;height:30px;padding:0;border:0;border-radius:999px;background:transparent;cursor:pointer;
+    font-size:16px;line-height:1;display:inline-flex;align-items:center;justify-content:center;opacity:.55;transition:opacity .2s,background .2s}
+  .theme-btn:hover{opacity:.9}
+  .theme-btn[aria-pressed="true"]{opacity:1;background:rgba(63,169,245,.18)}
+  .theme-btn:focus-visible{outline:2px solid var(--accent-blue);outline-offset:1px}
+  :root[data-theme="light"] .theme{background:rgba(255,255,255,.85)}
+
+/* Светлая тема визитки. Всё под :root[data-theme="light"], тёмная по умолчанию не меняется. */
+:root[data-theme="light"]{
+  color-scheme:light;
+  --bg-deep:#f4f6fa;
+  --bg-panel:#ffffff;
+  --bg-panel-hover:#f7faff;
+  --accent-blue:#0f6fc6;
+  --accent-cyan:#0a73a0;
+  --text-primary:#0e1730;
+  --text-muted:#56627c;
+  --divider:rgba(14,23,48,0.10);
+}
+:root[data-theme="light"] body{
+  background:linear-gradient(180deg,#eef3fa 0%,var(--bg-deep) 420px);
+}
+:root[data-theme="light"] ::selection{ background:rgba(15,111,198,0.18); color:var(--text-primary); }
+
+/* звёзды на светлом фоне не нужны, свечение - бледное голубое */
+:root[data-theme="light"] .stars{ display:none; }
+:root[data-theme="light"] .glow-top{
+  background:radial-gradient(closest-side, rgba(63,169,245,0.16), transparent 70%);
+}
+
+/* портрет и кольцо */
+:root[data-theme="light"] .ring{
+  background:conic-gradient(from 0deg, transparent 0%, #3fa9f5 12%, transparent 28%, transparent 60%, #1fb5e0 74%, transparent 88%);
+  opacity:0.9;
+}
+:root[data-theme="light"] .portrait{
+  border-color:#ffffff;
+  box-shadow:0 10px 32px rgba(15,111,198,0.20), 0 0 0 1px rgba(14,23,48,0.06);
+}
+
+/* строки-ссылки */
+:root[data-theme="light"] .link-row{
+  background:var(--bg-panel);
+  border-color:rgba(14,23,48,0.09);
+  box-shadow:0 1px 2px rgba(14,23,48,0.04), 0 4px 14px rgba(14,23,48,0.04);
+  transition:background .2s ease, border-color .2s ease, transform .15s ease, box-shadow .2s ease;
+}
+:root[data-theme="light"] .link-row:hover{
+  background:var(--bg-panel-hover);
+  border-color:rgba(15,111,198,0.35);
+  box-shadow:0 2px 4px rgba(14,23,48,0.05), 0 10px 26px rgba(15,111,198,0.10);
+}
+:root[data-theme="light"] .link-row.primary{
+  background:linear-gradient(135deg, #e7f2fd, #f2fafe);
+  border-color:rgba(15,111,198,0.28);
+}
+:root[data-theme="light"] .link-row.primary:hover{
+  background:linear-gradient(135deg, #dbecfc, #e8f6fd);
+  border-color:var(--accent-blue);
+}
+:root[data-theme="light"] .icon{ background:rgba(15,111,198,0.08); }
+:root[data-theme="light"] .link-row.primary .icon{ background:rgba(15,111,198,0.14); }
+
+:root[data-theme="light"] footer p{ color:#5f6b85; }
+
+:root[data-theme="light"] a:focus-visible{ outline:2px solid var(--accent-blue); outline-offset:2px; }
+
+/* подсказка после копирования */
+:root[data-theme="light"] .toast{
+  background:#ffffff;
+  color:var(--text-primary);
+  border-color:rgba(15,111,198,0.35);
+  box-shadow:0 14px 40px rgba(14,23,48,0.16);
+}
+
+/* переключатель языка */
+:root[data-theme="light"] .lang{
+  background:rgba(255,255,255,0.82);
+  border-color:rgba(14,23,48,0.10);
+  box-shadow:0 2px 10px rgba(14,23,48,0.06);
+}
+:root[data-theme="light"] .lang a{ color:var(--text-muted); }
+:root[data-theme="light"] .lang a:hover{ color:var(--text-primary); }
+:root[data-theme="light"] .lang a[aria-current]{ color:var(--accent-blue); background:rgba(15,111,198,0.10); }
+
+</style>
 </head>
 <body>
-  <nav class="lang lang-float" aria-label="Language / Язык / 语言"><a href="/" hreflang="ru" lang="ru" data-setlang="ru" title="Русский">RU</a><a href="/en/" hreflang="en" lang="en" data-setlang="en" title="English" aria-current="page">EN</a><a href="/zh/" hreflang="zh" lang="zh" data-setlang="zh" title="中文">中文</a></nav>
+  <div class="tools lang-float"><nav class="lang" aria-label="Language / Язык / 语言"><a href="/" hreflang="ru" lang="ru" data-setlang="ru" title="Русский">RU</a><a href="/en/" hreflang="en" lang="en" data-setlang="en" title="English" aria-current="page">EN</a><a href="/zh/" hreflang="zh" lang="zh" data-setlang="zh" title="中文">中文</a></nav><div class="theme" role="group" aria-label="Theme"><button type="button" class="theme-btn" data-set="light" aria-pressed="false" aria-label="Theme: light" title="Theme: light">☀️</button><button type="button" class="theme-btn" data-set="dark" aria-pressed="false" aria-label="Theme: dark" title="Theme: dark">🌙</button></div></div>
 
   <div class="stars"></div>
   <div class="glow-top"></div>
